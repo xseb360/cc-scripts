@@ -10,7 +10,7 @@ bootstrap = fs.open("/cc-scripts/bootstrap", "w")
 bootstrapConnection = http.get("https://raw.github.com/xseb360/cc-scripts/master/bootstrap.lua")
 
 assert(bootstrap, "Unable to save installer to disk! Please make sure your in-game computer has space available and try again!")
-assert(bootstrapConnection, "Unable to download installer components! Is your internet working? See if you can access https://raw.github.com/damien/cc-scripts/master/bootstrap.lua")
+assert(bootstrapConnection, "Unable to download installer components! Is your internet working? See if you can access https://raw.github.com/xseb360/cc-scripts/master/bootstrap.lua")
 
 bootstrap.write(bootstrapConnection.readAll())
 bootstrapConnection.close()
@@ -70,12 +70,12 @@ end
 -- This is pretty much just a selective copy from the latest
 -- code on Github.
 function install(path)
-  local url = "https://raw.github.com/damien/cc-scripts/master/" .. path .. ".lua"
+  local url = "https://raw.github.com/xseb360/cc-scripts/master/" .. path .. ".lua"
   local installPath = "/cc-scripts/" .. path
   local updated = fs.exists(installPath)
 
   print("Downloading " .. path .. " ...")
-  local conn = http.get("https://raw.github.com/damien/cc-scripts/master/" .. path .. ".lua")
+  local conn = http.get("https://raw.github.com/xseb360/cc-scripts/master/" .. path .. ".lua")
   local file = fs.open(installPath, "w")
 
   assert(conn, "Unable to download " .. path .. " - aborting!")
