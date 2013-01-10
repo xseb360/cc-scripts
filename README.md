@@ -18,7 +18,7 @@ Installation
    __If your server doesn't have the HTTP API enabled, have an admin check the ComputerCraft configuration files and enable it from there.__
 
 0. Enter the following snippet to download the installation:
-`loadstring(http.get("https://raw.github.com/damien/cc-scripts/master/bootstrap.lua").readAll())()`
+`loadstring(http.get("https://raw.github.com/xseb360/cc-scripts/master/bootstrap.lua").readAll())()`
 
 0. Follow the instructions given by the installer and you should be good to go!
 
