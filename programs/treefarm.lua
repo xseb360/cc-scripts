@@ -64,6 +64,16 @@ function chopTree()
   turtle.back()
 end
 
+
+
+
+local tArgs = { ... }
+if #tArgs > 0 then
+	local subCommand = 
+	
+	if tArgs[1]:gsub("^%l", string.lower) == "patrol"
+end
+
 while true do
   print("Tree farm initiated!")
   print("This turtle will now wait for a sapling in front of it to grow!")
