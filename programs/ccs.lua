@@ -33,9 +33,12 @@ assert(installer, "Unable to load installer")
 local tArgs = { ... }
 
 if #tArgs == 0 then
-  print("Usage: ccs <update|install> [[api|program] NAME]")
+  print("Usage: ccs <update|install|full> [[api|program] NAME]")
   print()
   print("Examples:")
+  print("  Install and update all programs and apis from cc-scripts:")
+  print("    ccs full")
+  print()
   print("  Install all programs and apis from cc-scripts:")
   print("    ccs install")
   print()
@@ -117,7 +120,23 @@ function printInstalledFiles()
   printFileList("/cc-scripts/apis")
 end
 
+function installAll()
+	  -- install everything
 
+    -- Install all our APIs
+    fs.makeDir("/cc-scripts/apis")
+    for i = 1, #apis do
+      install("apis/"..apis[i])
+    end
+
+    -- Install all of our programs
+    fs.makeDir("/cc-scripts/programs")
+    for i = 1, #programs do
+      install("programs/"..programs[i])
+    end
+
+    printInstalledFiles()
+end
 
 
 
@@ -142,32 +161,21 @@ if subCommand == "update" then
   else
     update(subCommandArgs)
   end
-end
-
-if subCommand == "install" then
+elseif subCommand == "full" then
+  if #tArgs > 1 then
+    print("Subcommand [full] takes no argument.")
+  else
+    installAll()
+    updateAll()    
+  end
+elseif subCommand == "install" then
   if #subCommandArgs > 2 then
     print("You may only install one item at a time.")
     return
-  end
-    
+  end    
   local path = ""
   if #subCommandArgs == 0 then
-	  -- install everything
-
-    -- Install all our APIs
-    fs.makeDir("/cc-scripts/apis")
-    for i = 1, #apis do
-      install("apis/"..apis[i])
-    end
-
-    -- Install all of our programs
-    fs.makeDir("/cc-scripts/programs")
-    for i = 1, #programs do
-      install("programs/"..programs[i])
-    end
-
-    printInstalledFiles()
-
+    installAll()
 	  return
   elseif subCommandArgs[1] == "api" then
     path = "apis/"
