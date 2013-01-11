@@ -68,13 +68,25 @@ while true do
   print("Tree farm initiated!")
   print("This turtle will now wait for a sapling in front of it to grow!")
   print("Plant a sapling in front of the turtle and come back later to collect any wood your turtle has harvested.")
+  print("Turtle will suck all around every 10 seconds in hope of catching some sapplings.")
   print()
   print("To exit, press and hold CTRL+T")
 
+  sinceSuck = 0
+
   -- Wait for a sapling to grow
   turtle.select(2)
-  while not turtle.compare()
-    do sleep(1)
+  while not turtle.compare() do 
+    
+    if sinceSuck > 10 then
+      suckAround()
+      sinceSuck = 0
+      turtle.select(2) -- restoring slot 2 just in case suck() changed it
+    end
+  
+    sleep(1)
+    sinceSuck = sinceSuck + 1
+  
   end
 
   chopTree()
