@@ -1,5 +1,3 @@
---Dave 3
-
 -- Name: bootstrap
 -- Source: /cc-scripts/bootstrap.lua
 -- The cc-scripts installer.
