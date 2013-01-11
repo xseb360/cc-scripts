@@ -22,6 +22,7 @@ programs = {
   "room",
   "shaft",
   "startup",
+  "test",
   "treefarm"
 }
 
