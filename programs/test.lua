@@ -26,6 +26,5 @@ end
 
 
 install("apis/cctest")
-
-os.loadAPI("apis/cctest")
+os.loadAPI("cctest")
 cctest.test()
