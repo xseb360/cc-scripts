@@ -2,7 +2,7 @@
 
 
 function install(path)
-  local installPath = "/cc-scripts/" .. path
+  local installPath = path
   local updated = fs.exists(installPath)
 
   print("Downloading " .. path .. " ...")
@@ -25,6 +25,6 @@ function install(path)
 end
 
 
-install("testbench/cctest")
+install("cctest")
 os.loadAPI("cctest")
 cctest.test()
