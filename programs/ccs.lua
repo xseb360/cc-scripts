@@ -140,6 +140,8 @@ if subCommand == "install" then
       install("programs/"..programs[i])
     end
 
+    print("Installed all programs and apis")
+
 	  return
   elseif subCommandArgs[1] == "api" then
     path = "apis/"
