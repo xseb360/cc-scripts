@@ -96,6 +96,31 @@ function updateAll()
   print("Updated all programs and apis")
 end
 
+
+
+function printFileList(path)
+  local FileList = fs.list("/cc-scripts/programs") --Table with all the files and directories available
+  local programList = ""
+
+  for _, file in ipairs(FileList) do --Loop. Underscore because we don't use the key, ipairs so it's in order
+    --print(file) --Print the file name
+    programList = programList..""..file..", "
+  end --End the loop
+
+  print(programList)
+end
+
+function printInstalledFiles()
+  print("Programs:")
+  printFileList("/cc-scripts/programs")
+  print("APIs:")
+  printFileList("/cc-scripts/apis")
+end
+
+
+
+
+
 -- ie: "update"
 local subCommand = tArgs[1]
 
@@ -141,7 +166,7 @@ if subCommand == "install" then
       install("programs/"..programs[i])
     end
 
-    print("Installed all programs and apis")
+    printInstalledFiles()
 
 	  return
   elseif subCommandArgs[1] == "api" then
