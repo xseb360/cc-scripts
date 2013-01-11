@@ -25,6 +25,6 @@ function install(path)
 end
 
 
-install("apis/cctest")
+install("testbench/cctest")
 os.loadAPI("cctest")
 cctest.test()
