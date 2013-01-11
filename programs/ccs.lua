@@ -2,22 +2,49 @@
 -- Source: /cc-scripts/programs/ccs.lua
 -- A script to manage cc-script packages.
 
+apis = {
+  "betterapi",
+  "cc_scripts",
+  "direction",
+  "events",
+  "funct",
+  "installer",
+  "turtletracker"
+}
+
+programs = {
+  "ccs",
+  "dig",
+  "direction",
+  "floor",
+  "move",
+  "position",
+  "room",
+  "shaft",
+  "startup",
+  "treefarm"
+}
+
+
 cc_scripts.loadAPI("installer")
 assert(installer, "Unable to load installer")
 
 local tArgs = { ... }
 
 if #tArgs == 0 then
-  print("Usage: ccs update [[api|program] NAME]")
+  print("Usage: ccs <update|install> [[api|program] NAME]")
   print()
   print("Examples:")
+  print("  Install all programs and apis from cc-scripts:")
+  print("    ccs install")
+  print()
   print("  Install a program from cc-scripts:")
   print("    ccs install program room")
   print()
   print("  Install an api from cc-scripts:")
   print("    ccs install api turtletracker")
   print()
-  print("  Update all programs and apis:")
+  print("  Update all installed programs and apis:")
   print("    ccs update")
   print()
   print("  Update the 'room' program:")
@@ -30,7 +57,7 @@ end
 
 -- Pull a script down from the cc-scripts repository and put it on the local computer.
 function install(path, force)
-  local url = "https://raw.github.com/damien/cc-scripts/master/" .. path .. ".lua"
+  local url = "https://raw.github.com/xseb360/cc-scripts/master/" .. path .. ".lua"
   local installPath = "/cc-scripts/" .. path
   return installer.install(url, installPath, force)
 end
@@ -96,9 +123,25 @@ if subCommand == "install" then
     print("You may only install one item at a time.")
     return
   end
-
+    
   local path = ""
-  if subCommandArgs[1] == "api" then
+  if #subCommandArgs == 0 then
+	  -- install everything
+
+    -- Install all our APIs
+    fs.makeDir("/cc-scripts/apis")
+    for i = 1, #apis do
+      install("apis/"..apis[i])
+    end
+
+    -- Install all of our programs
+    fs.makeDir("/cc-scripts/programs")
+    for i = 1, #programs do
+      install("programs/"..programs[i])
+    end
+
+	  return
+  elseif subCommandArgs[1] == "api" then
     path = "apis/"
   elseif subCommandArgs[1] == "program" then
     path = "programs/"
