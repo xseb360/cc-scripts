@@ -64,6 +64,16 @@ function chopTree()
   turtle.back()
 end
 
+function suckAround()
+  for i = 1, 4 do
+    turtle.suck()
+    turtle.turnRight()
+  end
+
+  turtle.suckUp()
+  turtle.suckDown()
+end
+
 while true do
   print("Tree farm initiated!")
   print("This turtle will now wait for a sapling in front of it to grow!")
