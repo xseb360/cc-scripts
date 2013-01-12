@@ -13,12 +13,16 @@ apis = {
 }
 
 programs = {
+  "b",
   "ccs",
   "dig",
   "direction",
+  "f",
   "floor",
+  "l",
   "move",
   "position",
+  "r",
   "room",
   "shaft",
   "startup",
