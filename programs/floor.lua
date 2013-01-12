@@ -26,10 +26,9 @@ end
 -- the block in slot 1 OR if the block below is empty (air or liquid).
 function placeIfDifferent(slot)
   turtle.select(1)
-  while not turtle.compareDown() do
+  if not turtle.compareDown() then
     turtle.select(slot)
     turtle.placeDown()
-    turtle.select(1)
   end
 end
 
@@ -41,6 +40,13 @@ end
 -- Returns true if the turtle couple place a similar block,
 -- returns false if there are no additional blocks identical
 -- to the block in slot 1 to place.
+function placeSimilarBlockFromInventoryUntilCompare()
+  turtle.select(1)
+  while not turtle.compareDown() do
+    placeSimilarBlockFromInventory()
+  end
+end
+
 function placeSimilarBlockFromInventory()
   turtle.select(1)
 
@@ -66,7 +72,7 @@ end
 function placeRow(length)
   for i = 1, length do
     if turtle.detectDown() then turtle.digDown() end
-    placeSimilarBlockFromInventory()
+    placeSimilarBlockFromInventoryUntilCompare()
     if i ~= length then forward() end
   end
 end
