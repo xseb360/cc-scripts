@@ -18,6 +18,7 @@ programs = {
   "dig",
   "direction",
   "f",
+  "fl",
   "floor",
   "l",
   "move",

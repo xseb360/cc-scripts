@@ -16,3 +16,10 @@ os.loadAPI("/cc-scripts/apis/cc_scripts")
 
 -- Print the version of cc-scripts in use on startup
 print("cc-scripts v" .. cc_scripts.versionString())
+
+
+if turtle then
+  turtleLabel = os.getComputerLabel()
+  turtleFuel = turtle.getFuelLevel()
+  print(turtleLabel.." fuel level is : "..turtleFuel)
+end
