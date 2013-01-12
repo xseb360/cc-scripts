@@ -26,9 +26,10 @@ end
 -- the block in slot 1 OR if the block below is empty (air or liquid).
 function placeIfDifferent(slot)
   turtle.select(1)
-  if not turtle.compareDown() then
+  while not turtle.compareDown() do
     turtle.select(slot)
     turtle.placeDown()
+    turtle.select(1)
   end
 end
 
