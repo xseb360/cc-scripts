@@ -16,6 +16,7 @@ programs = {
   "autofuel",
   "b",
   "ccs",
+  "d",
   "dig",
   "direction",
   "f",
@@ -29,7 +30,8 @@ programs = {
   "shaft",
   "startup",
   "test",
-  "treefarm"
+  "treefarm",
+  "u"
 }
 
 
