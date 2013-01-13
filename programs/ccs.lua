@@ -30,6 +30,7 @@ programs = {
   "shaft",
   "startup",
   "test",
+  "torch",
   "treefarm",
   "u"
 }
