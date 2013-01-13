@@ -8,6 +8,9 @@ print("Enter width:")
 vWidth = tonumber(read())
 vWidthPos = 0
 facing = 1
+
+print("Clear unaligned torches (slower) [y/n]:")
+vClearUnalignedTorches = read()
  
  
 function forward()
@@ -55,7 +58,7 @@ function updatePos()
   modifWidthPos = {0,1,0,-1}
   vFarPos = vFarPos + modifFarPos[facing]
   vWidthPos = vWidthPos + modifWidthPos[facing]
-  print("far ".. vFarPos.."Width"..vWidthPos)
+  --print("far ".. vFarPos.."Width"..vWidthPos)
 end
  
 function turnLeft()
@@ -110,6 +113,15 @@ function main()
     end
     rotate()
     forward()
+
+    if vClearUnalignedTorches == "n" then
+      forward()
+      forward()
+      forward()
+      forward()
+      forward()
+    end
+
     rotateBack()
     turtle.digDown()
     placeTorch()
