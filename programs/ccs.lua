@@ -13,6 +13,7 @@ apis = {
 }
 
 programs = {
+  "autofuel",
   "b",
   "ccs",
   "dig",
