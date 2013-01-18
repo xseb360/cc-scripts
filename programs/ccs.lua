@@ -19,6 +19,8 @@ programs = {
   "d",
   "dig",
   "direction",
+  "excavateakr",
+  "excavateresume",
   "f",
   "fl",
   "floor",
