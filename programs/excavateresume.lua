@@ -169,6 +169,41 @@ local function tryDown()
 	return true
 end
 
+-- Try moving down, killing mobs but no digging.
+local function tryMoveDown()
+	if not refuel() then
+		print( "Not enough Fuel" )
+		returnSupplies()
+	end
+	
+	while not turtle.down() do
+		if turtle.detectDown() then
+      return false; -- reached bottom.
+		elseif turtle.attackDown() then
+			if not collect() then
+				returnSupplies()
+			end
+		else
+			sleep( 0.5 )
+		end
+	end
+
+	depth = depth + 1
+	if math.fmod( depth, 10 ) == 0 then
+		print( "Descended "..depth.." metres." )
+	end
+
+	return true
+end
+
+
+-- Try moving down until hitting bottom.
+local function goBackToTheBottom()
+  while tryMoveDown() do
+  end
+  print("Found bottom at "..depth.." metres.")
+end
+
 local function turnLeft()
 	turtle.turnLeft()
 	xDir, zDir = -zDir, xDir
@@ -265,6 +300,9 @@ if not refuel() then
 	print( "Out of Fuel" )
 	return
 end
+
+print( "Going to the bottom..." )
+goBackToTheBottom()
 
 print( "Excavating..." )
 
