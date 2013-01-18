@@ -1,4 +1,4 @@
-﻿-- Adapted excavate script to start mining from the lowest layer under the turtle.
+-- Adapted excavate script to start mining from the lowest layer under the turtle.
 
 local tArgs = { ... }
 if #tArgs ~= 1 then
