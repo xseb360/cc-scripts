@@ -24,6 +24,7 @@ programs = {
   "f",
   "fl",
   "floor",
+  "gasstation",
   "l",
   "move",
   "position",
