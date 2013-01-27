@@ -9,7 +9,8 @@ function selectSimilarBlock(slot)
 	-- Attempt to find similar blocks in other slots
 	for i = 1, 16 do
 		if i ~= slot and turtle.compareTo(i) then
-			select(i)
+      print('[debug]i('..i..') is different than slot('..slot..')')
+			turtle.select(i)
 			return true
 		end
 	end
@@ -17,7 +18,7 @@ function selectSimilarBlock(slot)
 	-- Place excess blocks from slot 1
 	-- after using all other slots
 	if turtle.getItemCount(1) > 1 then
-		select(i)
+		turtle.select(i)
 		return true
 	end
 
