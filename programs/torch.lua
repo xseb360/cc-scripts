@@ -119,7 +119,6 @@ function main()
       forward()
       forward()
       forward()
-      forward()
     end
 
     rotateBack()
