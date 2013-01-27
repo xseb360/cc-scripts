@@ -83,9 +83,7 @@ function placeRow(length)
 end
 
 for currentWidth = 1, width do
-  if currentWidth == 1 then
-    forward()
-  else
+  if currentWidth ~= 1 then
     if currentWidth % 2 == 0 then
       turtle.turnRight()
       forward()
