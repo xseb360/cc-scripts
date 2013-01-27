@@ -9,7 +9,6 @@ function selectSimilarBlock(slot)
 	-- Attempt to find similar blocks in other slots
 	for i = 1, 16 do
 		if i ~= slot and turtle.compareTo(i) then
-      print('[debug]i('..i..') is different than slot('..slot..')')
 			turtle.select(i)
 			return true
 		end
