@@ -119,6 +119,8 @@ function main()
       forward()
       forward()
       forward()
+      column = column + 4
+      if column > vWidth then return end
     end
 
     rotateBack()
