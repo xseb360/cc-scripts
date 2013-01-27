@@ -16,8 +16,8 @@ function selectSimilarBlock(slot)
 
 	-- Place excess blocks from slot 1
 	-- after using all other slots
-	if turtle.getItemCount(1) > 1 then
-		turtle.select(i)
+	if turtle.getItemCount(slot) > 1 then
+		turtle.select(slot)
 		return true
 	end
 
