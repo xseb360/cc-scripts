@@ -9,6 +9,7 @@ apis = {
   "events",
   "funct",
   "installer",
+  "inv",
   "turtletracker"
 }
 
@@ -36,7 +37,8 @@ programs = {
   "test",
   "torch",
   "treefarm",
-  "u"
+  "u",
+  "wall"
 }
 
 
