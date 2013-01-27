@@ -1,4 +1,5 @@
 os.loadAPI('cc-scripts/apis/inv')
+--os.loadAPI('cc-scripts/apis/turtletracker')
 
 
 local tArgs = { ... }
@@ -26,7 +27,24 @@ function buildLayer()
     end
 
     turtle.placeDown()
-    if i ~= length then turtle.forward() end
+    if i ~= length then forceForward() end
+  end
+end
+
+
+function forceForward()
+  
+  while not turtle.forward() do
+    turtle.dig()
+    sleep(0.2)
+  end
+
+end
+
+function forceUp()
+  while not turtle.up() do
+    turtle.digUp()
+    sleep(0.2)
   end
 end
 
@@ -34,7 +52,7 @@ end
 for i = 1, heigth do
   
   -- Move up once to placeDown blocks
-  turtle.up()
+  forceUp()
   
   -- Will placeDown block and move forward until AFTER the end of the wall.
   buildLayer()
