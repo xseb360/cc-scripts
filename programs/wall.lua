@@ -26,7 +26,7 @@ end
 
 
 -- Build 1 layer of the wall.
-fonction buildLayer()
+function buildLayer()
   for i = 1, length do
 
     while not inv.selectSimilarBlock(1) do
