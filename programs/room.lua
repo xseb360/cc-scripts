@@ -2,7 +2,8 @@ local tArgs = { ... }
 
 if #tArgs ~= 3 then
   print("Usage: room <length> <width> <height>")
-  print("Example: room 9 9 5")
+  print("  Example: room 9 9 5")
+  print("  Note: Digging in front of the turtle. Excluding its current position.")
   return
 end
 
