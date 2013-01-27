@@ -36,6 +36,8 @@ local function unload()
   	  turtle.select(n)
 		  turtle.drop()
     end
+
+    sleep(0.2)
 	end
 	collected = 0
 	turtle.select(1)
