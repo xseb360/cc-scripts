@@ -27,8 +27,17 @@ local function unload()
 	print( "Unloading items..." )
 	for n=1,16 do
 		unloaded = unloaded + turtle.getItemCount(n)
-		turtle.select(n)
-		turtle.drop()
+
+	  turtle.select(n)
+	  turtle.drop()
+
+    while turtle.getItemCount(n) > 0 do
+      sleep(10)
+  	  turtle.select(n)
+		  turtle.drop()
+    end
+
+    sleep(0.2)
 	end
 	collected = 0
 	turtle.select(1)
