@@ -76,7 +76,7 @@ function placeRow(length)
     if turtle.detectDown() then turtle.digDown() end
 
     -- if block under was really removed (in case its bedrock, skip).
-    if not if turtle.detectDown() placeSimilarBlockFromInventoryUntilCompare() end
+    if not if turtle.detectDown() then placeSimilarBlockFromInventoryUntilCompare() end
 
     if i ~= length then forward() end
   end
