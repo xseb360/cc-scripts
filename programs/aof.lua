@@ -377,6 +377,16 @@ function checkReturn()
 		for i = ofsave["ignore"]+3, 16 do
 			turtle.select(i)
 			turtle.drop()
+
+      -- Drop until it really dropped. Wait for chest to empty itself.
+      while turtle.getItemCount(i) > 0 do
+        Report("Drop chest seems full. Retrying in 30 sec...")
+        sleep(30)
+
+      	turtle.select(i)
+			  turtle.drop()
+      end
+
 		end
 		turtle.select(1)
 		returnLast()
@@ -459,9 +469,10 @@ function oreFinder()
 end
 
 function runOreFinder(width, length, ignore)
-	printCentered("Receiving coordinates from host...", 4)
-	rednet.open("right")
-	x,y,z = gps.locate(5)		
+--	printCentered("Receiving coordinates from host...", 4)
+--	rednet.open("right")
+--	x,y,z = gps.locate(5)		
+
 	if not x and not y and not z then
 		while true do
 			while true do
@@ -469,7 +480,7 @@ function runOreFinder(width, length, ignore)
 					while true do
 						term.clear()
 						drawHeader()
-						printCentered("Unable to get GPS cords.  Please,", 4)
+--						printCentered("Unable to get GPS cords.  Please,", 4)
 						printCentered("enter the turtles cords manually.", 5)
 						printLeft("     x: ", 7)
 						printLeft("     y: ", 8)
@@ -563,7 +574,7 @@ function runOreFinder(width, length, ignore)
 	end
 	parallel.waitForAny(oreFinder, skip)
 
-  report(0, 0, 0, "Advanced Ore Finder Completed.")
+  report("Advanced Ore Finder Completed.")
 
 end
 
