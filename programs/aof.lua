@@ -16,7 +16,13 @@ end
 
 
 
-local function report(x, y, z, s)
+local function report(s)
+
+
+	local x = ofsave["currentPos"]["x"] = x
+	local y = ofsave["currentPos"]["y"] = y
+	local z = ofsave["currentPos"]["z"] = z
+
   ccstatus.report("("..x..", "..y..", "..z..") "..s)
   print(s)
 end
@@ -239,6 +245,9 @@ function compareForward(startSlot, endSlot)
 end
 
 function findDown(n) -- Finds all ores bellow the turtle for "n" distance
+
+  Report("Going down...")
+
 	if not n then
 		n=y-1
 	end
@@ -265,7 +274,7 @@ function returnLast()
 	local returnPosz = ofsave["returnPos"]["z"]
 	local returnPosface = ofsave["returnPos"]["face"]
 
-  report(returnPosx, returnPosy, returnPosz, "Returning to last...")
+  report("Returning to last...")
 
 	moveToPos(returnPosx, returnPosy, returnPosz, returnPosface)
 end
@@ -275,7 +284,7 @@ function returnStart()
 	local startPosy = ofsave["startPos"]["y"]
 	local startPosz = ofsave["startPos"]["z"]
 
-  report(startPosx, startPosy, startPosz, "Returning to start...")
+  report("Returning to start...")
 
 	moveToPos(startPosx, startPosy, startPosz, faceB)
 end
