@@ -473,7 +473,7 @@ function runOreFinder(width, length, ignore)
 --	rednet.open("right")
 --	x,y,z = gps.locate(5)		
 
-	if not x and not y and not z then
+	--if not x and not y and not z then
 		while true do
 			while true do
 				while true do
@@ -510,27 +510,27 @@ function runOreFinder(width, length, ignore)
 				break
 			end
 		end
-	else
-		local moved = turtle.forward()
-		if not moved and turtle.detect() then
-			repeat dig() until turtle.forward()
-			local moved = true
-		elseif not moved and not turtle.detect() then
-			repeat turtle.attack() until turtle.forward()
-		end
-		local tmpx,tmpy,tmpz = gps.locate(5)
-		turtle.back()
-		if tmpx > x then
-			face = 3
-		elseif tmpx < x then
-			face = 1
-		elseif tmpz > z then
-			face = 0
-		elseif tmpz < z then
-			face = 2
-		end
-	end
-	if width and length and ignore then
+	--else
+		--local moved = turtle.forward()
+		--if not moved and turtle.detect() then
+			--repeat dig() until turtle.forward()
+			--local moved = true
+		--elseif not moved and not turtle.detect() then
+			--repeat turtle.attack() until turtle.forward()
+		--end
+		--local tmpx,tmpy,tmpz = gps.locate(5)
+		--turtle.back()
+		--if tmpx > x then
+			--face = 3
+		--elseif tmpx < x then
+			--face = 1
+		--elseif tmpz > z then
+			--face = 0
+		--elseif tmpz < z then
+			--face = 2
+		--end
+	--end
+	--if width and length and ignore then
 		term.clear()
 		drawHeader()
 		printCentered("Starting a new excavation,", 4)
