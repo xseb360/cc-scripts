@@ -1,6 +1,9 @@
 -- Advanced Ore Finder by Henness
 -- Version 2.0 12/16/2012
 
+-- APIs
+os.loadAPI('cc-scripts/apis/ccstatus')
+
 -- Config
 local version = "v2.0"
 local author = "[by Henness]"
@@ -10,6 +13,14 @@ screenw,screenh = term.getSize()
 function version()
 	return Version
 end
+
+
+
+local function report(x, y, z, s)
+  ccstatus.report("("..x..", "..y..", "..z..") "..s)
+  print(s)
+end
+
 
 function printCentered(str, ypos)
 	term.setCursorPos(screenw/2 - #str/2, ypos)
@@ -253,6 +264,9 @@ function returnLast()
 	local returnPosy = ofsave["returnPos"]["y"]
 	local returnPosz = ofsave["returnPos"]["z"]
 	local returnPosface = ofsave["returnPos"]["face"]
+
+  report(returnPosx, returnPosy, returnPosz, "Returning to last...")
+
 	moveToPos(returnPosx, returnPosy, returnPosz, returnPosface)
 end
 
@@ -260,6 +274,9 @@ function returnStart()
 	local startPosx = ofsave["startPos"]["x"]
 	local startPosy = ofsave["startPos"]["y"]
 	local startPosz = ofsave["startPos"]["z"]
+
+  report(startPosx, startPosy, startPosz, "Returning to start...")
+
 	moveToPos(startPosx, startPosy, startPosz, faceB)
 end
 
@@ -537,6 +554,9 @@ function runOreFinder(width, length, ignore)
 		faceB = faceF-2
 	end
 	parallel.waitForAny(oreFinder, skip)
+
+  report(0, 0, 0, "Advanced Ore Finder Completed.")
+
 end
 
 local tArgs = { ... }
