@@ -375,22 +375,25 @@ function checkReturn()
 			turtle.drop(turtle.getItemCount(i)-1)
 		end
 		for i = ofsave["ignore"]+3, 16 do
-			turtle.select(i)
-			turtle.drop()
-
-      -- Drop until it really dropped. Wait for chest to empty itself.
-      while turtle.getItemCount(i) > 0 do
-        report("Drop chest seems full. Retrying in 30 sec...")
-        sleep(30)
-
-      	turtle.select(i)
-			  turtle.drop()
-      end
-
+      emptySlot(i)
 		end
 		turtle.select(1)
 		returnLast()
 	end
+end
+
+function emptySlot(n)
+	turtle.select(n)
+	turtle.drop()
+
+  -- Drop until it really dropped. Wait for chest to empty itself.
+  while turtle.getItemCount(n) > 0 do
+    report("Drop chest seems full. Retrying in 30 sec...")
+    sleep(30)
+
+    turtle.select(n)
+		turtle.drop()
+  end
 end
 
 function oreFinder()
@@ -464,6 +467,11 @@ function oreFinder()
 		saveTable(ofsave, "ofsave")
 	end
 	returnStart()
+
+	for i = 1, 16 do
+    emptySlot(i)
+  end
+  
 	setFace(faceF)
 	fs.delete("ofsave")
 end
