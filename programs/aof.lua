@@ -380,7 +380,7 @@ function checkReturn()
 
       -- Drop until it really dropped. Wait for chest to empty itself.
       while turtle.getItemCount(i) > 0 do
-        Report("Drop chest seems full. Retrying in 30 sec...")
+        report("Drop chest seems full. Retrying in 30 sec...")
         sleep(30)
 
       	turtle.select(i)
