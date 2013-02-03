@@ -148,7 +148,7 @@ function down(n) -- Moves the turtle down "n" distance
 	if not n then
 		n=1
 	end
-	if y>1 then
+--	if y>1 then
 		for k=1,n,1 do
 			moved = turtle.down()
 			if moved then
@@ -158,7 +158,7 @@ function down(n) -- Moves the turtle down "n" distance
 				break
 			end
 		end
-	end
+--	end
 	return moved
 end
 
