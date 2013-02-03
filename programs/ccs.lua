@@ -5,6 +5,7 @@
 apis = {
   "betterapi",
   "cc_scripts",
+  "ccstatus",
   "direction",
   "events",
   "funct",
