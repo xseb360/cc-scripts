@@ -530,7 +530,7 @@ function runOreFinder(width, length, ignore)
 			--face = 2
 		--end
 	--end
-	--if width and length and ignore then
+	if width and length and ignore then
 		term.clear()
 		drawHeader()
 		printCentered("Starting a new excavation,", 4)
