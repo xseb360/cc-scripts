@@ -248,7 +248,7 @@ function findDown(n) -- Finds all ores bellow the turtle for "n" distance
   report("Going down...")
 
 	if not n then
-		n=y-1
+		n=256--y-1
 	end
 	for i=1,n,1 do
 		local moved = down()
@@ -477,68 +477,6 @@ function oreFinder()
 end
 
 function runOreFinder(width, length, ignore)
---	printCentered("Receiving coordinates from host...", 4)
---	rednet.open("right")
---	x,y,z = gps.locate(5)		
-
-	--if not x and not y and not z then
-		--while true do
-			--while true do
-				--while true do
-					--while true do
-						--term.clear()
-						--drawHeader()
-----						printCentered("Unable to get GPS cords.  Please,", 4)
-						--printCentered("enter the turtles cords manually.", 5)
-						--printLeft("     x: ", 7)
-						--printLeft("     y: ", 8)
-						--printLeft("     z: ", 9)
-						--printLeft("  face: ", 11)
-						--term.setCursorPos(9, 7)
-						--x = tonumber(read())
-						--if x ~= nil then
-							--break
-						--end
-					--end
-					--term.setCursorPos(9, 8)
-					--y = tonumber(read())
-					--if y ~= nil and y > 0 and y < 256 then
-						--break
-					--end
-				--end
-				--term.setCursorPos(9, 9)
-				--z = tonumber(read())
-				--if z ~= nil then
-					--break
-				--end
-			--end
-			--term.setCursorPos(9, 11)
-			--face = tonumber(read())
-			--if face ~= nil and face < 4 and face >= 0 then
-				--break
-			--end
-		--end
-	--else
-		--local moved = turtle.forward()
-		--if not moved and turtle.detect() then
-			--repeat dig() until turtle.forward()
-			--local moved = true
-		--elseif not moved and not turtle.detect() then
-			--repeat turtle.attack() until turtle.forward()
-		--end
-		--local tmpx,tmpy,tmpz = gps.locate(5)
-		--turtle.back()
-		--if tmpx > x then
-			--face = 3
-		--elseif tmpx < x then
-			--face = 1
-		--elseif tmpz > z then
-			--face = 0
-		--elseif tmpz < z then
-			--face = 2
-		--end
-	--end
-
   x, y, z, face = 0,0,0,0
 
 	if width and length and ignore then
