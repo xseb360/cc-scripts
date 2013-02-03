@@ -18,11 +18,11 @@ end
 
 local function report(s)
 
-	local x = ofsave["currentPos"]["x"]
-	local y = ofsave["currentPos"]["y"]
-	local z = ofsave["currentPos"]["z"]
+	local reportX = ofsave["currentPos"]["x"]
+	local reportY = ofsave["currentPos"]["y"]
+	local reportZ = ofsave["currentPos"]["z"]
 
-  ccstatus.report("("..x..", "..y..", "..z..") "..s)
+  ccstatus.report("("..reportX..", "..reportY..", "..reportZ..") "..s)
   print(s)
 end
 
@@ -482,42 +482,42 @@ function runOreFinder(width, length, ignore)
 --	x,y,z = gps.locate(5)		
 
 	--if not x and not y and not z then
-		while true do
-			while true do
-				while true do
-					while true do
-						term.clear()
-						drawHeader()
---						printCentered("Unable to get GPS cords.  Please,", 4)
-						printCentered("enter the turtles cords manually.", 5)
-						printLeft("     x: ", 7)
-						printLeft("     y: ", 8)
-						printLeft("     z: ", 9)
-						printLeft("  face: ", 11)
-						term.setCursorPos(9, 7)
-						x = tonumber(read())
-						if x ~= nil then
-							break
-						end
-					end
-					term.setCursorPos(9, 8)
-					y = tonumber(read())
-					if y ~= nil and y > 0 and y < 256 then
-						break
-					end
-				end
-				term.setCursorPos(9, 9)
-				z = tonumber(read())
-				if z ~= nil then
-					break
-				end
-			end
-			term.setCursorPos(9, 11)
-			face = tonumber(read())
-			if face ~= nil and face < 4 and face >= 0 then
-				break
-			end
-		end
+		--while true do
+			--while true do
+				--while true do
+					--while true do
+						--term.clear()
+						--drawHeader()
+----						printCentered("Unable to get GPS cords.  Please,", 4)
+						--printCentered("enter the turtles cords manually.", 5)
+						--printLeft("     x: ", 7)
+						--printLeft("     y: ", 8)
+						--printLeft("     z: ", 9)
+						--printLeft("  face: ", 11)
+						--term.setCursorPos(9, 7)
+						--x = tonumber(read())
+						--if x ~= nil then
+							--break
+						--end
+					--end
+					--term.setCursorPos(9, 8)
+					--y = tonumber(read())
+					--if y ~= nil and y > 0 and y < 256 then
+						--break
+					--end
+				--end
+				--term.setCursorPos(9, 9)
+				--z = tonumber(read())
+				--if z ~= nil then
+					--break
+				--end
+			--end
+			--term.setCursorPos(9, 11)
+			--face = tonumber(read())
+			--if face ~= nil and face < 4 and face >= 0 then
+				--break
+			--end
+		--end
 	--else
 		--local moved = turtle.forward()
 		--if not moved and turtle.detect() then
@@ -538,6 +538,9 @@ function runOreFinder(width, length, ignore)
 			--face = 2
 		--end
 	--end
+
+  x, y, z, face = 0
+
 	if width and length and ignore then
 		term.clear()
 		drawHeader()
