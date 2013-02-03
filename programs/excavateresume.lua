@@ -1,5 +1,8 @@
 -- Adapted excavate script to start mining from the lowest layer under the turtle.
 
+os.loadAPI('cc-scripts/apis/ccstatus')
+
+
 local tArgs = { ... }
 if #tArgs ~= 1 then
 	print( "Usage: excavate <diameter>" )
@@ -23,8 +26,18 @@ local xDir,zDir = 0,1
 local goTo -- Filled in further down
 local refuel -- Filled in further down
 
+
+
+
+
+local function report(s)
+  ccstatus.report("("..xPos..", "..depth..", "..zPos..") "..s)
+  print(s)
+end
+
+
 local function unload()
-	print( "Unloading items..." )
+	report( "Unloading items..." )
 	for n=1,16 do
 		unloaded = unloaded + turtle.getItemCount(n)
 
@@ -45,13 +58,13 @@ end
 
 local function returnSupplies()
 	local x,y,z,xd,zd = xPos,depth,zPos,xDir,zDir
-	print( "Returning to surface..." )
+	report( "Returning to surface..." )
 	goTo( 0,0,0,0,-1 )
 	
 	local fuelNeeded = x+y+z + x+y+z + 1
 	if not refuel( fuelNeeded ) then
 		unload()
-		print( "Waiting for fuel" )
+		report( "Waiting for fuel" )
 		while not refuel( fuelNeeded ) do
 			sleep(1)
 		end
@@ -59,7 +72,7 @@ local function returnSupplies()
 		unload()	
 	end
 	
-	print( "Resuming mining..." )
+	report( "Resuming mining..." )
 	goTo( x,y,z,xd,zd )
 end
 
@@ -77,12 +90,12 @@ local function collect()
 	if nTotalItems > collected then
 		collected = nTotalItems
 		if math.fmod(collected + unloaded, 50) == 0 then
-			print( "Mined "..(collected + unloaded).." items." )
+			report( "Mined "..(collected + unloaded).." items." )
 		end
 	end
 	
 	if bFull then
-		print( "No empty slots left." )
+		report( "No empty slots left." )
 		return false
 	end
 	return true
@@ -120,7 +133,7 @@ end
 
 local function tryForwards()
 	if not refuel() then
-		print( "Not enough Fuel" )
+		report( "Not enough Fuel" )
 		returnSupplies()
 	end
 	
@@ -149,7 +162,7 @@ end
 
 local function tryDown()
 	if not refuel() then
-		print( "Not enough Fuel" )
+		report( "Not enough Fuel" )
 		returnSupplies()
 	end
 	
@@ -173,7 +186,7 @@ local function tryDown()
 
 	depth = depth + 1
 	if math.fmod( depth, 10 ) == 0 then
-		print( "Descended "..depth.." metres." )
+		report( "Descended "..depth.." metres." )
 	end
 
 	return true
@@ -182,7 +195,7 @@ end
 -- Try moving down, killing mobs but no digging.
 local function tryMoveDown()
 	if not refuel() then
-		print( "Not enough Fuel" )
+		report( "Not enough Fuel" )
 		returnSupplies()
 	end
 	
@@ -200,7 +213,7 @@ local function tryMoveDown()
 
 	depth = depth + 1
 	if math.fmod( depth, 10 ) == 0 then
-		print( "Descended "..depth.." metres." )
+		report( "Descended "..depth.." metres." )
 	end
 
 	return true
@@ -211,7 +224,7 @@ end
 local function goBackToTheBottom()
   while tryMoveDown() do
   end
-  print("Found bottom at "..depth.." metres.")
+  report("Found bottom at "..depth.." metres.")
 end
 
 local function turnLeft()
@@ -307,14 +320,14 @@ function goTo( x, y, z, xd, zd )
 end
 
 if not refuel() then
-	print( "Out of Fuel" )
+	report( "Out of Fuel" )
 	return
 end
 
-print( "Going to the bottom..." )
+report( "Going to the bottom..." )
 goBackToTheBottom()
 
-print( "Excavating..." )
+report( "Excavating..." )
 
 local reseal = false
 turtle.select(1)
@@ -376,7 +389,7 @@ while not done do
 	end
 end
 
-print( "Returning to surface..." )
+report( "Returning to surface..." )
 
 -- Return to where we started
 goTo( 0,0,0,0,-1 )
@@ -388,4 +401,4 @@ if reseal then
 	turtle.placeDown()
 end
 
-print( "Mined "..(collected + unloaded).." items total." )
+report( "Mined "..(collected + unloaded).." items total." )
