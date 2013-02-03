@@ -539,7 +539,7 @@ function runOreFinder(width, length, ignore)
 		--end
 	--end
 
-  x, y, z, face = 0
+  x, y, z, face = 0,0,0,0
 
 	if width and length and ignore then
 		term.clear()
