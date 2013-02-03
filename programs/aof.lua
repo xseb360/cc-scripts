@@ -18,10 +18,9 @@ end
 
 local function report(s)
 
-
-	local x = ofsave["currentPos"]["x"] = x
-	local y = ofsave["currentPos"]["y"] = y
-	local z = ofsave["currentPos"]["z"] = z
+	local x = ofsave["currentPos"]["x"]
+	local y = ofsave["currentPos"]["y"]
+	local z = ofsave["currentPos"]["z"]
 
   ccstatus.report("("..x..", "..y..", "..z..") "..s)
   print(s)
