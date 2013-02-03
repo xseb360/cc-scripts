@@ -245,7 +245,7 @@ end
 
 function findDown(n) -- Finds all ores bellow the turtle for "n" distance
 
-  Report("Going down...")
+  report("Going down...")
 
 	if not n then
 		n=y-1
