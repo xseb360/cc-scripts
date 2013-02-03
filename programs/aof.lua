@@ -540,4 +540,5 @@ elseif fs.exists("ofsave") and #tArgs == 0 then
 	runOreFinder()
 else
 	print("Usage: " .. shell.getRunningProgram() .. " <width> <length> <ignore>")
+  print("Slots: Fuel - Cap - Ignore1 - Ignore2")
 end
