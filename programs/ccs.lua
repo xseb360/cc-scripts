@@ -210,3 +210,13 @@ elseif subCommand == "install" then
     print("Try running: ccs update " .. subCommandArgs[1] .. " " .. subCommandArgs[2])
   end
 end
+
+
+
+-- update startup
+local hadStartup = fs.exists("/startup")
+-- Clobber any previous startup script
+if hadStartup then
+  fs.delete("/startup")
+end
+fs.copy("/cc-scripts/programs/startup", "/startup")
