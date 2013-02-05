@@ -397,6 +397,15 @@ function emptySlot(n)
 end
 
 function oreFinder()
+
+  -- move right until block is
+  report("Seeking farthest column...")
+  turnRight()
+  while forward() and ofsave["w"] <= ofsave["width"] do    
+  end
+  turnLeft()
+  report("Resuming at column "..ofsave["w"])
+
 	while ofsave["w"] <= ofsave["width"] do
 		while ofsave["l"] <= ofsave["length"] do
 			checkReturn()
