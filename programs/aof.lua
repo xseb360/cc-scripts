@@ -401,7 +401,11 @@ function oreFinder()
   -- move right until block is
   report("Seeking farthest column...")
   turnRight()
-  while forward() and ofsave["w"] <= ofsave["width"] do    
+  while forward() and ofsave["w"] <= ofsave["width"] do
+
+ 		local seekingW = ofsave["w"] + 1
+		ofsave["w"] = seekingW
+
   end
   turnLeft()
   report("Resuming at column "..ofsave["w"])
