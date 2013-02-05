@@ -1,8 +1,8 @@
 -- Better Ore Finder
 
 if not turtle.position then
-  os.loadAPI('cc-scripts/apis/betterapi.lua')
-  os.loadAPI('turtletracker.lua')
+  os.loadAPI('cc-scripts/apis/turtletracker')
+  os.loadAPI('cc-scripts/apis/inv')
 end
 
 
@@ -27,26 +27,118 @@ function getStaggeredStartZ(x)
 end
 
 
-function getNextDig(currentLoc, area)
+function getNextDig(currentDig, area)
 	
-	nextLoc = currentLoc
+	local nextDig = currentDig
 	
-	nextLoc.Z = currentLoc.Z + 5
+	nextDig.Z = currentDig.Z + 5
 
-	if nextLoc.Z > area.Z
-		nextLoc.X = currentLoc.X + 1
-		if nextLoc.X > area.X
+	if nextDig.Z > area.Z
+		nextDig.X = currentDig.X + 1
+		if nextDig.X > area.X
 			return false -- Area completed
 		end
 		
-		nextLoc.Z = getStaggeredStartZ(nextLoc.X)
+		nextDig.Z = getStaggeredStartZ(nextDig.X)
 	end
 	
-	return true, nextLoc
+	return true, nextDig
+end
+
+function gotoNextDigLocation(area)
+	
+	local nextDigFound, nextDigLoc = getNextDig(turtle.position, area)
+	
+	if not nextDigFound then 
+		return false 
+	end
+	
+	gotoDigLoc(nextDigLoc)
+	return true
+end
+
+function gotoDigLoc(digLoc)
+	turtle.digTo(digLoc)
 end
 
 
+function forceDown()
+  while not turtle.down() do
+    turtle.digDown()
+    --InventoryCheck
+    sleep(0.2)
+  end
+end
 
+function forceUp()
+  while not turtle.up() do
+    turtle.digUp()
+    sleep(0.2)
+  end
+end
+
+function tryDown()
+  if turtle.down() do
+    return true
+  end
+  
+  turtle.digDown()
+  return turtle.down()
+end
+
+function dig()
+	
+	while digOne do
+	end
+	
+end
+
+function undig()
+
+	while  do
+    undigOne()
+	end
+
+end
+
+
+function undigOne()
+ 
+  forceUp()
+  
+  if not inv.selectSimilarBlock(1) then 
+    if not inv.selectSimilarBlock(2) then 
+      print('out of filling materials');
+      return false
+    end
+  end
+  
+  turtle.placeDown()
+ 
+end
+
+function digOne()
+	
+	if not tryDown() then return false end
+	
+	-- look for ore around
+	
+	return true
+	
+end
+
+function main()
+
+	startingDig = vector.new(0,0,getStaggeredStartZ(0))
+	gotoDigLoc(currentDig)
+	
+	repeat
+		dig()
+		undig()
+	until not gotoNextDigLocation(currentDig, area)
+
+	turtle.goto(0,0,0)
+end
 
 
 
