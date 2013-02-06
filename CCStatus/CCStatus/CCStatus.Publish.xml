@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="\\CASPER3\wwwroot\CCStatus" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="Web.config" publishTime="02/03/2013 13:40:42" />
+    <file relUrl="Account/Web.config" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="Account/Register.aspx" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="Account/Login.aspx" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="bin/CCStatus.dll" publishTime="02/03/2013 14:43:26" />
+    <file relUrl="bin/CCStatus.pdb" publishTime="02/03/2013 14:43:26" />
+    <file relUrl="Account/ChangePasswordSuccess.aspx" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="report.aspx" publishTime="02/03/2013 03:04:10" />
+    <file relUrl="Styles/Site.css" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="Account/ChangePassword.aspx" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="Global.asax" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="02/03/2013 02:58:50" />
+    <file relUrl="Default.aspx" publishTime="02/03/2013 17:59:07" />
+    <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="02/03/2013 02:58:50" />
+  </publishProfile>
+</publishData>
