@@ -32,7 +32,6 @@ local refuel -- Filled in further down
 
 local function report(s)
   ccstatus.report("("..xPos..", "..depth..", "..zPos..") "..s)
-  print(s)
 end
 
 
@@ -319,86 +318,93 @@ function goTo( x, y, z, xd, zd )
 	end
 end
 
-if not refuel() then
-	report( "Out of Fuel" )
-	return
+function main()
+  if not refuel() then
+    report( "Out of Fuel" )
+    return
+  end
+
+  report( "Going to the bottom..." )
+  goBackToTheBottom()
+
+  report( "Excavating..." )
+
+  local reseal = false
+  turtle.select(1)
+  if turtle.digDown() then
+    reseal = true
+  end
+
+  local alternate = 0
+  local done = false
+  while not done do
+    for n=1,size do
+      for m=1,size-1 do
+        if not tryForwards() then
+          done = true
+          break
+        end
+      end
+      if done then
+        break
+      end
+      if n<size then
+        if math.fmod(n + alternate,2) == 0 then
+          turnLeft()
+          if not tryForwards() then
+            done = true
+            break
+          end
+          turnLeft()
+        else
+          turnRight()
+          if not tryForwards() then
+            done = true
+            break
+          end
+          turnRight()
+        end
+      end
+    end
+    if done then
+      break
+    end
+    
+    if size > 1 then
+      if math.fmod(size,2) == 0 then
+        turnRight()
+      else
+        if alternate == 0 then
+          turnLeft()
+        else
+          turnRight()
+        end
+        alternate = 1 - alternate
+      end
+    end
+    
+    if not tryDown() then
+      done = true
+      break
+    end
+  end
+
+  report( "Returning to surface..." )
+
+  -- Return to where we started
+  goTo( 0,0,0,0,-1 )
+  unload()
+  goTo( 0,0,0,0,1 )
+
+  -- Seal the hole
+  if reseal then
+    turtle.placeDown()
+  end
+
+  report( "Mined "..(collected + unloaded).." items total." )
 end
 
-report( "Going to the bottom..." )
-goBackToTheBottom()
-
-report( "Excavating..." )
-
-local reseal = false
-turtle.select(1)
-if turtle.digDown() then
-	reseal = true
+local ok, err = pcall(main)
+if not ok then
+  ccstatus.report(err)
 end
-
-local alternate = 0
-local done = false
-while not done do
-	for n=1,size do
-		for m=1,size-1 do
-			if not tryForwards() then
-				done = true
-				break
-			end
-		end
-		if done then
-			break
-		end
-		if n<size then
-			if math.fmod(n + alternate,2) == 0 then
-				turnLeft()
-				if not tryForwards() then
-					done = true
-					break
-				end
-				turnLeft()
-			else
-				turnRight()
-				if not tryForwards() then
-					done = true
-					break
-				end
-				turnRight()
-			end
-		end
-	end
-	if done then
-		break
-	end
-	
-	if size > 1 then
-		if math.fmod(size,2) == 0 then
-			turnRight()
-		else
-			if alternate == 0 then
-				turnLeft()
-			else
-				turnRight()
-			end
-			alternate = 1 - alternate
-		end
-	end
-	
-	if not tryDown() then
-		done = true
-		break
-	end
-end
-
-report( "Returning to surface..." )
-
--- Return to where we started
-goTo( 0,0,0,0,-1 )
-unload()
-goTo( 0,0,0,0,1 )
-
--- Seal the hole
-if reseal then
-	turtle.placeDown()
-end
-
-report( "Mined "..(collected + unloaded).." items total." )

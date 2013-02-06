@@ -1,3 +1,6 @@
+-- APIs
+os.loadAPI('cc-scripts/apis/ccstatus')
+
 local tArgs = { ... }
 
 if #tArgs ~= 2 then
@@ -50,22 +53,30 @@ end
 function placeSimilarBlockFromInventory()
   turtle.select(1)
 
-  -- Place excess blocks from slot 1
-  -- before using any other slots
-  if turtle.getItemCount(1) > 1 then
-    placeIfDifferent(1)
-    return true
-  end
+  while 1 do
 
-  -- Attempt to find similar blocks in other slots
-  for i = 2, 16 do
-    if turtle.compareTo(i) then
-      placeIfDifferent(i)
+  -- Place excess blocks from slot 1
+    -- before using any other slots
+    if turtle.getItemCount(1) > 1 then
+      placeIfDifferent(1)
       return true
     end
-  end
 
-  -- If we've gotten this far, we're out of blocks to place
+    -- Attempt to find similar blocks in other slots
+    for i = 2, 16 do
+      if turtle.compareTo(i) then
+        placeIfDifferent(i)
+        return true
+      end
+    end
+    
+    -- If we've gotten this far, we're out of blocks to place
+    ccstatus.report("Out of floor building blocks. Retrying in 10 secs...")
+    sleep(10)
+  
+  end -- while 1
+  
+  -- will never get here now. looping and waiting until new blocks are added to inventory.
   return false
 end
 
@@ -82,20 +93,30 @@ function placeRow(length)
   end
 end
 
-for currentWidth = 1, width do
-  if currentWidth ~= 1 then
-    if currentWidth % 2 == 0 then
-      turtle.turnRight()
-      forward()
-      turtle.turnRight()
-    else
-      turtle.turnLeft()
-      forward()
-      turtle.turnLeft()
+function main()
+  for currentWidth = 1, width do
+    if currentWidth ~= 1 then
+      if currentWidth % 2 == 0 then
+        turtle.turnRight()
+        forward()
+        turtle.turnRight()
+      else
+        turtle.turnLeft()
+        forward()
+        turtle.turnLeft()
+      end
+    end
+    
+    ccstatus.report("Building floor row "..i.."/"..width)
+    if placeRow(length) == false then
+      ccstatus.report("Ran out of blocks to place!") --should never happen anymore...
     end
   end
-  
-  if placeRow(length) == false then
-    print("Ran out of blocks to place!")
-  end
+
+  ccstatus.report("Floor complete!")
+end
+
+local ok, err = pcall(main)
+if not ok then
+  ccstatus.report(err)
 end

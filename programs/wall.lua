@@ -1,3 +1,5 @@
+-- APIs
+os.loadAPI('cc-scripts/apis/ccstatus')
 os.loadAPI('cc-scripts/apis/inv')
 --os.loadAPI('cc-scripts/apis/turtletracker')
 
@@ -22,7 +24,8 @@ local heigth  = tonumber( tArgs[2] )
 function buildLayer()
   for i = 1, length do
 
-    while not inv.selectSimilarBlock(1) do
+    while not inv.selectSimilarBlock(1) do    
+      ccstatus.report("Out of wall building blocks. Retrying in 10 secs...")
       sleep(10)
     end
 
@@ -48,17 +51,26 @@ function forceUp()
   end
 end
 
+function main()
+  for i = 1, heigth do
+    
+    -- Move up once to placeDown blocks
+    forceUp()
+    
+    -- Will placeDown block and move forward until AFTER the end of the wall.
+    ccstatus.report("Building wall layer "..i.."/"..heigth)
+    buildLayer()
 
-for i = 1, heigth do
-  
-  -- Move up once to placeDown blocks
-  forceUp()
-  
-  -- Will placeDown block and move forward until AFTER the end of the wall.
-  buildLayer()
+    -- turn around
+    turtle.turnRight()
+    turtle.turnRight()
+    
+  end
 
-  -- turn around
-  turtle.turnRight()
-  turtle.turnRight()
-  
+  ccstatus.report("Wall complete!")
+end
+
+local ok, err = pcall(main)
+if not ok then
+  ccstatus.report(err)
 end

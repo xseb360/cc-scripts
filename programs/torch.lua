@@ -1,3 +1,6 @@
+-- APIs
+os.loadAPI('cc-scripts/apis/ccstatus')
+
 local tArgs = { ... }
  
 term.clear()
@@ -34,7 +37,7 @@ function placeTorch()
         turtle.placeDown()
         loop = false
       else
-        print("Please add more torches.")
+        ccstatus.report("Please add more torches.")
         print("Hit ENTER to continue.")
         read()
       end
@@ -106,6 +109,9 @@ function main()
   turtle.up()
   placeTorch()
   for column=1, vWidth do
+  
+    ccstatus.report("Placing torches on column "..column.."/"..vWidth)
+  
     for steps=1, vFar do
       forward()
       turtle.digDown()
@@ -128,8 +134,13 @@ function main()
     placeTorch()
   end
   back()
+  
+  ccstatus.report("Torch complete!")
 end
  
  
- 
-main()
+local ok, err = pcall(main)
+if not ok then
+  ccstatus.report(err)
+end
+

@@ -7,7 +7,6 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 -- Config
 local version = "v2.0"
 local author = "[by Henness]"
-screenw,screenh = term.getSize()
 
 -- Functions
 function version()
@@ -23,24 +22,6 @@ local function report(s)
 	local reportZ = ofsave["currentPos"]["z"]
 
   ccstatus.report("("..reportX..", "..reportY..", "..reportZ..") "..s)
-  print(s)
-end
-
-
-function printCentered(str, ypos)
-	term.setCursorPos(screenw/2 - #str/2, ypos)
-	term.write(str)
-end
-
-function printLeft(str, ypos)
-	term.setCursorPos(1, ypos)
-	term.write(str)
-end
-
-function drawHeader()
-	printCentered("Advanced OreFinder", 1)
-	printCentered(string.rep("-", screenw), 2) 
-	printCentered(string.rep("-", screenw-#author)..author, screenh)
 end
 
 function skip()
@@ -225,10 +206,10 @@ end
 
 function compareForward(startSlot, endSlot)
 	if not startSlot then
-		startSlot = 3
+		startSlot = 2
 	end
 	if not endSlot then
-		endSlot = ofsave["ignore"] + 2
+		endSlot = ofsave["ignore"] + 1
 	end
 	Ore = true
 	for i=startSlot,endSlot do
@@ -350,31 +331,13 @@ function moveToPos(A, B, C, Face)
 end
 
 function checkReturn()
-	if turtle.getFuelLevel() < 2 * y + ofsave["length"] + ofsave["width"] then
+	if turtle.getItemCount(16) > 0 then
 		returnStart()
-		for i = 3, ofsave["ignore"]+2 do
+		for i = 2, ofsave["ignore"]+1 do -- skipping 1st slot (cap). Up to Ignore +1(cap).
 			turtle.select(i)
 			turtle.drop(turtle.getItemCount(i)-1)
 		end
-		for i = ofsave["ignore"]+3, 16 do
-			turtle.select(i)
-			turtle.drop()
-		end
-		turtle.select(1)
-		repeat
-			if turtle.getItemCount(1) > 1 then
-				turtle.refuel(1)
-			end
-			sleep(0.1)
-		until turtle.getFuelLevel() > 2 * y + ofsave["length"] + ofsave["width"]
-		returnLast()
-	elseif turtle.getItemCount(16) > 0 then
-		returnStart()
-		for i = 3, ofsave["ignore"]+2 do
-			turtle.select(i)
-			turtle.drop(turtle.getItemCount(i)-1)
-		end
-		for i = ofsave["ignore"]+3, 16 do
+		for i = ofsave["ignore"]+2, 16 do -- from slot 1 + ignore + cap (ignore +2).
       emptySlot(i)
 		end
 		turtle.select(1)
@@ -492,66 +455,58 @@ end
 function runOreFinder(width, length, ignore)
   x, y, z, face = 0,0,0,0
 
-	if width and length and ignore then
-		term.clear()
-		drawHeader()
-		printCentered("Starting a new excavation,", 4)
-		printCentered("press space at any time to pause.", 5)
-		ofsave = {
-			["startPos"] = {
-				["x"] = x, ["y"] = y, ["z"] = z, ["face"] = face
-			},
-			["currentPos"] = {
-				["x"] = x, ["y"] = y, ["z"] = z, ["face"] = face
-			},
-			["returnPos"] = {
-				["x"] = x, ["y"] = y, ["z"] = z, ["face"] = face
-			},
-			["ignore"] = ignore,
-			["forward"] = false,
-			["left"] = false,
-			["right"] = false,
-			["length"] = length,
-			["width"] = width,
-			["l"] = 1,
-			["w"] = 1
-		}
-		if fs.exists("ofsave") then
-			fs.delete("ofsave")
-		end
-		saveTable(ofsave, "ofsave")
-	else
-		term.clear()
-		drawHeader()
-		printCentered("Continuing from previous excavation,", 4)
-		printCentered("press space at any time to pause.", 5)
-		ofsave = loadTable("ofsave")
-		moveToPos(ofsave["currentPos"]["x"],ofsave["currentPos"]["y"],ofsave["currentPos"]["z"],ofsave["returnPos"]["face"])
-	end
+  print("Starting a new excavation,", 4)
+  print("press space at any time to pause.", 5)
+  ofsave = {
+    ["startPos"] = {
+      ["x"] = x, ["y"] = y, ["z"] = z, ["face"] = face
+    },
+    ["currentPos"] = {
+      ["x"] = x, ["y"] = y, ["z"] = z, ["face"] = face
+    },
+    ["returnPos"] = {
+      ["x"] = x, ["y"] = y, ["z"] = z, ["face"] = face
+    },
+    ["ignore"] = ignore,
+    ["forward"] = false,
+    ["left"] = false,
+    ["right"] = false,
+    ["length"] = length,
+    ["width"] = width,
+    ["l"] = 1,
+    ["w"] = 1
+  }
+  if fs.exists("ofsave") then
+    fs.delete("ofsave")
+  end
+  saveTable(ofsave, "ofsave")
+
 	faceF = ofsave["startPos"]["face"]
 	if faceF<=1 then
 		faceB = faceF+2
 	else 
 		faceB = faceF-2
 	end
+  
+  
 	parallel.waitForAny(oreFinder, skip)
-
   report("Advanced Ore Finder Completed.")
-
 end
 
-local tArgs = { ... }
-term.clear()
-drawHeader()
-term.setCursorPos(1,1)
-if #tArgs == 3 then
-	width = tonumber(tArgs[1])
-	length = tonumber(tArgs[2])
-	ignore = tonumber(tArgs[3])
-	runOreFinder(width, length, ignore)
-elseif fs.exists("ofsave") and #tArgs == 0 then
-	runOreFinder()
-else
-	print("Usage: " .. shell.getRunningProgram() .. " <width> <length> <ignore>")
-  print("Slots: Fuel - Cap - Ignore1 - Ignore2")
+function main()
+  local tArgs = { ... }
+  if #tArgs == 3 then
+    width = tonumber(tArgs[1])
+    length = tonumber(tArgs[2])
+    ignore = tonumber(tArgs[3])
+    runOreFinder(width, length, ignore)
+  else
+    print("Usage: " .. shell.getRunningProgram() .. " <width> <length> <ignore>")
+    print("Slots: Cap - Ignore1 - Ignore2 - ...")
+  end
+end
+
+local ok, err = pcall(main)
+if not ok then
+  ccstatus.report(err)
 end
