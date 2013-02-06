@@ -8,7 +8,7 @@
 
     <meta http-equiv="refresh" content="15">
 </head>
-<body style="background-color:Black; color:Silver; font-family:Courier New">
+<body style="background-color:Black; color:Silver; font-family:Courier New; white-space:pre">
     <form id="form1" runat="server">
     <div>
     

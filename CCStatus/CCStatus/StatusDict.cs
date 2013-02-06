@@ -82,7 +82,7 @@ namespace CCStatus
 
 			foreach (string key in statuses.Keys)
 			{
-				s += key + ": " + statuses[key] + "<br/>";
+				s += key.PadRight(8) + ": " + statuses[key] + "<br/>";
 			}
 
 			return s;
