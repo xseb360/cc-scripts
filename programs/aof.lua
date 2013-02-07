@@ -379,7 +379,7 @@ function oreFinder()
 			if math.fmod((ofsave["returnPos"]["x"]+4)-2*(ofsave["returnPos"]["z"]-1), 5) == 0 then
 				findDown()
 				returnLast()
-				turtle.select(2)
+				turtle.select(1)
 				turtle.placeDown()
 			end
 			if ofsave["l"] == ofsave["length"] then
