@@ -493,8 +493,9 @@ function runOreFinder(width, length, ignore)
   report("Advanced Ore Finder Completed.")
 end
 
+local tArgs = { ... }
+
 function main()
-  local tArgs = { ... }
   if #tArgs == 3 then
     width = tonumber(tArgs[1])
     length = tonumber(tArgs[2])
