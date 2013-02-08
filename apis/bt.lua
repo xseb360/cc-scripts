@@ -14,7 +14,7 @@ function digUpUntilClear()
 
   while turtle.detectUp() do
     turtle.digUp()
-    sleep(0.2)
+    sleep(0.5)
   end
 
 end
