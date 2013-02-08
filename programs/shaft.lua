@@ -19,7 +19,7 @@ end
 
 function torchOne()
   inv.waitForSelectSimilarBlock(2, "torch")
-  PlaceUp()  
+  turtle.placeUp()
 end
 
 function main()
