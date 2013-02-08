@@ -4,6 +4,7 @@
 
 apis = {
   "betterapi",
+  "bt",
   "cc_scripts",
   "ccstatus",
   "direction",
