@@ -5,7 +5,7 @@
 os.loadAPI('cc-scripts/apis/ccstatus')
 
 -- Config
-local version = "v2.0"
+local version = "v2.1 (better gravel)"
 local author = "[by Henness]"
 
 -- Functions
@@ -522,6 +522,7 @@ function main()
   else
     print("Usage: " .. shell.getRunningProgram() .. " <width> <length> <ignore>")
     print("Slots: Cap - Ignore1 - Ignore2 - ...")
+    print("  version: "..version)
   end
 end
 
