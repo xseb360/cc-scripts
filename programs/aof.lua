@@ -224,7 +224,7 @@ function compareForward(startSlot, endSlot)
 	end
 end
 
-function findDown(n) -- Finds all ores bellow the turtle for "n" distance
+function findDown(n) -- Finds all ores below the turtle for "n" distance
 
   report("Going down...")
 
@@ -233,19 +233,29 @@ function findDown(n) -- Finds all ores bellow the turtle for "n" distance
 	end
 	for i=1,n,1 do
 		local moved = down()
-		if not moved and turtle.detectDown() then
-			digDown()
+		
+    if not moved and turtle.detectDown() then
+			
+      digDown()
 			if not down() then
 				break
 			end
+      
 		elseif not moved and not turtle.detectDown() then
 			repeat turtle.attackDown() until down()
 		end
+    
+    ofsave["returnPos"]["y"] = y
+    checkReturn()
+    
 		for j=1,4 do
 			compareForward()
 			turnRight()
 		end
 	end
+
+  ofsave["returnPos"]["y"] = 0
+
 end
 
 function returnLast()
@@ -330,9 +340,7 @@ function moveToPos(A, B, C, Face)
 	setFace(Face)
 end
 
-function checkReturn()
-	if turtle.getItemCount(16) > 0 then
-		returnStart()
+function unload()
 		for i = 2, ofsave["ignore"]+1 do -- skipping 1st slot (cap). Up to Ignore +1(cap).
 			turtle.select(i)
 			turtle.drop(turtle.getItemCount(i)-1)
@@ -340,8 +348,16 @@ function checkReturn()
 		for i = ofsave["ignore"]+2, 16 do -- from slot 1 + ignore + cap (ignore +2).
       emptySlot(i)
 		end
+end
+
+function checkReturn()
+	if turtle.getItemCount(16) > 0 then
+		returnStart()
+    
+    unload()
 		turtle.select(1)
-		returnLast()
+		
+    returnLast()
 	end
 end
 
