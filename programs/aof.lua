@@ -251,7 +251,7 @@ function findDown(n) -- Finds all ores below the turtle for "n" distance
 		for j=1,4 do
 			compareForward()
 
-      if 1 == 1 then
+      if i == 1 then
  				turtle.select(1) -- select cap slot
         turtle.place()
       end
