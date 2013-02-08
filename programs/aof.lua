@@ -8,13 +8,6 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 local version = "v2.1 (better gravel)"
 local author = "[by Henness]"
 
--- Functions
-function version()
-	return Version
-end
-
-
-
 local function report(s)
 
 	local reportX = ofsave["currentPos"]["x"]
