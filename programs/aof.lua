@@ -6,7 +6,7 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 os.loadAPI('cc-scripts/apis/bt')
 
 -- Config
-local version = "v2.2 (better gravel, bt api, slot 1 selected to loot)"
+local version = "v2.3 (better gravel, bt init)"
 local author = "[by Henness]"
 
 local function report(s)
@@ -509,6 +509,9 @@ end
 local tArgs = { ... }
 
 function main()
+  
+  if not bt.init() then return end
+
   if #tArgs == 3 then
     width = tonumber(tArgs[1])
     length = tonumber(tArgs[2])

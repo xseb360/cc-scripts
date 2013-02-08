@@ -1,6 +1,11 @@
 -- Better Turtle
 
 
+function init()
+  print("Better Turtle API Ready.")
+  return true
+end
+
 function forceForward()
   
   while not turtle.forward() do
