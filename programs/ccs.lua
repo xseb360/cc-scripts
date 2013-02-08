@@ -53,7 +53,7 @@ if #tArgs == 0 then
   print()
   print("Examples:")
   print("  Install and update all programs and apis from cc-scripts:")
-  print("    ccs full")
+  print("    ccs full [branch]")
   print()
   print("  Install all programs and apis from cc-scripts:")
   print("    ccs install")
@@ -75,9 +75,15 @@ if #tArgs == 0 then
   print()
 end
 
+
+branch = "master"
+
 -- Pull a script down from the cc-scripts repository and put it on the local computer.
 function install(path, force)
-  local url = "https://raw.github.com/xseb360/cc-scripts/master/" .. path .. ".lua"
+
+  if not branch then branch = "master" end
+
+  local url = "https://raw.github.com/xseb360/cc-scripts/"..branch.."/" .. path .. ".lua"
   local installPath = "/cc-scripts/" .. path
   return installer.install(url, installPath, force)
 end
@@ -138,6 +144,7 @@ end
 
 function installAll()
 	  -- install everything
+    
 
     -- Install all our APIs
     fs.makeDir("/cc-scripts/apis")
@@ -178,9 +185,15 @@ if subCommand == "update" then
     update(subCommandArgs)
   end
 elseif subCommand == "full" then
-  if #tArgs > 1 then
-    print("Subcommand [full] takes no argument.")
+  if #tArgs > 2 then
+    print("Subcommand [full] cannot take more than 1 argument.")
+    print("    ccs full [branch]")
   else
+    
+    if #tArgs > 1 then
+      branch = subCommandArgs[1]
+    end
+    
     installAll()
     updateAll()    
   end
