@@ -29,7 +29,16 @@ namespace CCStatus
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			Response.Write(TheStatusDict.ToHtml() + "<BR/>> _");
+			Response.Write("<BR/>");
+			lblOutput.Text = TheStatusDict.ToHtml() + "<BR/>";
+		}
+
+		protected void btnClear_Click(object sender, EventArgs e)
+		{
+			TheStatusDict.Clear();
+			TheStatusDict.SaveToFolder(Server.MapPath("~"));
+
+			lblOutput.Text = TheStatusDict.ToHtml() + "<BR/>";
 		}
 
 	}

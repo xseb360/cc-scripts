@@ -11,7 +11,6 @@ namespace CCStatus
 	[Serializable]
 	public class StatusItem
 	{
-
 		private string statusText;
 
 		public string Key { get; set; }
@@ -46,6 +45,7 @@ namespace CCStatus
 	[Serializable]
 	public class StatusDict
 	{
+		private const int maxIdleTime = 15;
 
 		Dictionary<string, StatusItem> statuses = new Dictionary<string, StatusItem>();
 
@@ -106,7 +106,7 @@ namespace CCStatus
 
 			foreach (string key in statuses.Keys.OrderBy(key => key))
 			{
-				if (DateTime.Now - statuses[key].TimeStamp < new TimeSpan(0, 15, 0))
+				if (DateTime.Now - statuses[key].TimeStamp < new TimeSpan(0, maxIdleTime, 0))
 					s += statuses[key].ToHtml() + "<br/>";
 			}
 
@@ -117,7 +117,7 @@ namespace CCStatus
 
 			foreach (string key in statuses.Keys.OrderBy(key => key))
 			{
-				if (DateTime.Now - statuses[key].TimeStamp >= new TimeSpan(0, 15, 0))
+				if (DateTime.Now - statuses[key].TimeStamp >= new TimeSpan(0, maxIdleTime, 0))
 					s += statuses[key].ToHtml() + "<br/>";
 			}
 
@@ -171,7 +171,11 @@ namespace CCStatus
 
 		public void Clear()
 		{
-			statuses.Clear();
+			foreach (string key in statuses.Keys.OrderBy(key => key))
+			{
+				if (DateTime.Now - statuses[key].TimeStamp >= new TimeSpan(0, maxIdleTime, 0))
+					statuses.Remove(key);
+			}
 		}
 	}
 }
