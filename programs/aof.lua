@@ -3,9 +3,10 @@
 
 -- APIs
 os.loadAPI('cc-scripts/apis/ccstatus')
+os.loadAPI('cc-scripts/apis/bt')
 
 -- Config
-local version = "v2.1 (better gravel)"
+local version = "v2.2 (better gravel, bt api, slot 1 selected to loot)"
 local author = "[by Henness]"
 
 local function report(s)
@@ -386,6 +387,7 @@ function oreFinder()
 
 	while ofsave["w"] <= ofsave["width"] do
 		while ofsave["l"] <= ofsave["length"] do
+      turtle.select(1) --make sure we are not collecting block in slot 16 and give the appearance that we are full to CheckReturn.
 			checkReturn()
 			if math.fmod((ofsave["returnPos"]["x"]+4)-2*(ofsave["returnPos"]["z"]-1), 5) == 0 then
 				findDown()
