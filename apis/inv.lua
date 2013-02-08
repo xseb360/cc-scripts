@@ -1,6 +1,16 @@
 
 
 
+function waitForSelectSimilarBlock(slot, blockName)
+
+    while not inv.selectSimilarBlock(slot) do    
+      ccstatus.report("Out of "..blockName..". Retrying in 10 secs...")
+      sleep(10)
+    end
+
+end
+
+
 function selectSimilarBlock(slot)
 	
 	-- Select the slot to compare to

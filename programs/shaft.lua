@@ -1,84 +1,57 @@
+-- APIs
+os.loadAPI('cc-scripts/apis/ccstatus')
+os.loadAPI('cc-scripts/apis/inv')
+os.loadAPI('cc-scripts/apis/bt')
+
+
 local tArgs = {...}
 
-if #tArgs ~= 1 then
-  print("Usage: shaft <length>")
-  print("Note: If length isn't an even number, it will be rounded up.")
-  return
-end
+function shaftOne()
 
-local length = tonumber( tArgs[1] )
-
--- We dig columns 2 at a time,
--- so we only need to count up
--- to half the desired length
-if length % 2 ~= 0 then
-  length = (length + 1) /2
-else
-  length = length / 2
-end
-
-function dig()
-  while turtle.detect() do
-    turtle.dig()
-    sleep(0.5)
-  end
-end
-
-function digUp()
-  while turtle.detectUp() do
-    turtle.digUp()
-    sleep(0.5)
-  end
-end
-
-function digDown()
+  bt.forceForward()
+  bt.digUpUntilClear()
   turtle.digDown()
+
+  inv.waitForSelectSimilarBlock(1, "floor block")
+  turtle.placeDown()
+
 end
 
-function digColumnUp(height)
-  dig()
-  turtle.forward()
-  
-  for i = 1, height do
-    dig()
-    if i ~= height then digUp() end
-    turtle.up()
+function torchOne()
+  inv.waitForSelectSimilarBlock(2, "torch")
+  PlaceUp()  
+end
+
+function main()
+
+  if #tArgs ~= 1 then
+    print("Usage: shaft <length>")
+    print("  Shaft begins in front of turtle.")
+    print("  2 high. Replace floor. Torch every 5.")
+    print("  Slots: Cobble, torch")
+    return
   end
-end
 
-function digColumnDown(height)
-  dig()
-  turtle.forward()
-  
-  for i = 1, height do
-    dig()
-    if i~= height then digDown() end
-    turtle.down()
-  end
-end
+  local length = tonumber( tArgs[1] )
 
-for distance = 1, length do
-  if distance % 2 == 1 then
-    digColumnUp(4)
-  else
-    digColumnDown(4)
-  end
-  
-  dig()
-  turtle.forward()
-end
+  ccstatus.report("Digging shaft "..length.." meters long...")
 
--- Return to our starting position
-turtle.turnLeft()
-turtle.turnLeft()
-for i=1, (length * 2) do
-  if not turtle.forward() then
-    while not turtle.forward() do
-      sleep(0.5)
+  for i=1,length do
+
+    shaftOne()
+
+    if math.fmod(i, 5) == 0 then
+      torchOne()
     end
+
   end
 
-  if length % 2 ~= 0 then
-    for i = 1, 4 do turtle.down() end
-  end
+  ccstatus.report("Shaft complete!")
 end
+
+local ok, err = pcall(main)
+if not ok then
+  ccstatus.report(err)
+end
+
+
