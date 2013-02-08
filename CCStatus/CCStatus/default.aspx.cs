@@ -29,8 +29,8 @@ namespace CCStatus
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			Response.Write(TheStatusDict.ToHtml());
-			Response.Write("> _");
+			Response.Write(TheStatusDict.ToHtml() + "<BR/>> _");
 		}
+
 	}
 }

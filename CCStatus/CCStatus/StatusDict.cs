@@ -80,7 +80,7 @@ namespace CCStatus
 		{
 			string s = "";
 
-			foreach (string key in statuses.Keys)
+			foreach (string key in statuses.Keys.OrderBy(key => key))
 			{
 				s += key.PadRight(8) + ": " + statuses[key] + "<br/>";
 			}
@@ -134,5 +134,9 @@ namespace CCStatus
 			sw.Close();
 		}
 
+		public void Clear()
+		{
+			statuses.Clear();
+		}
 	}
 }
