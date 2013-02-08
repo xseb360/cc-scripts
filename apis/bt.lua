@@ -21,7 +21,7 @@ end
 
 function forceUp()
 
-  while not turtle.up() then
+  while not turtle.up() do
   
     digUpUntilClear()
 
