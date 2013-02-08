@@ -18,10 +18,15 @@ function shaftOne()
 end
 
 function torchOne()
-  turtle.up()
+  turtle.turnRight()
+  turtle.turnRight()
+
   inv.waitForSelectSimilarBlock(2, "torch")
-  turtle.placeDown()
-  turtle.down()
+
+  turtle.place()
+
+  turtle.turnRight()
+  turtle.turnRight()
 end
 
 function main()
