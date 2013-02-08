@@ -206,7 +206,7 @@ end
 
 function compareForward(startSlot, endSlot)
 	if not startSlot then
-		startSlot = 2
+		startSlot = 2 --first ignore slot
 	end
 	if not endSlot then
 		endSlot = ofsave["ignore"] + 1
@@ -250,6 +250,12 @@ function findDown(n) -- Finds all ores below the turtle for "n" distance
     
 		for j=1,4 do
 			compareForward()
+
+      if 1 == 1 then
+ 				turtle.select(1) -- select cap slot
+        turtle.place()
+      end
+
 			turnRight()
 		end
 	end
