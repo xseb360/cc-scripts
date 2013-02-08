@@ -291,13 +291,9 @@ function moveToPos(A, B, C, Face)
 	c=C-z
 	if b>0 then
 		for i=1,math.abs(b) do
-			local moved = up()
-			if not moved and turtle.detectUp() then
-				repeat digUp() until up()
-				local moved = true
-			elseif not moved and not turtle.detectUp() then
-				repeat turtle.attackUp() until up()
-			end
+			local moved = bt.forceUp() -- Always return true. Or never return.
+      y=y+1
+			save()
 		end
 	end
 	if a<0 then

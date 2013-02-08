@@ -18,3 +18,21 @@ function digUpUntilClear()
   end
 
 end
+
+function forceUp()
+
+  while not turtle.up() then
+  
+    digUpUntilClear()
+
+    if turtle.up() then return true end
+    
+    for i=1,5 do -- attack for a while, but maybe the gravel just got here, so we break and retry digging up
+      turtle.attackUp()
+    end
+
+  end
+
+  return true
+
+end
