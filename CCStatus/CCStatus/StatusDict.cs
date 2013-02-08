@@ -11,27 +11,43 @@ namespace CCStatus
 	[Serializable]
 	public class StatusItem
 	{
+
+		private string statusText;
+
+		public string Key { get; set; }
+
+		public string StatusText 
+		{
+			get
+			{
+				return statusText;
+			}
+
+			set
+			{
+				statusText = value;
+				TimeStamp = DateTime.Now;
+			}
+		}
+		public DateTime TimeStamp { get; set; }
+
 		public StatusItem()
 		{
 		}
-		
 
-		public StatusItem(string k, string v)
+
+		public string ToHtml()
 		{
-			Key = k;
-			Value = v;
+			return Key.PadRight(8) + ": " + TimeStamp.ToString("HH:mm:ss") + " " + StatusText;
 		}
-
-		public string Key { get; set; }
-		public string Value { get; set; }
 	}
 
 
 	[Serializable]
 	public class StatusDict
 	{
-		
-		Dictionary<string, string> statuses = new Dictionary<string, string>();
+
+		Dictionary<string, StatusItem> statuses = new Dictionary<string, StatusItem>();
 
 		public StatusItem[] StatusArray
 		{
@@ -41,7 +57,7 @@ namespace CCStatus
 
 				foreach (string key in statuses.Keys)
 				{
-					statusList.Add(new StatusItem(key, statuses[key]));
+					statusList.Add(statuses[key]);
 				}
 
 				return statusList.ToArray();
@@ -51,7 +67,7 @@ namespace CCStatus
 			{
 				foreach (StatusItem item in value)
 				{
-					statuses.Add(item.Key, item.Value);
+					statuses.Add(item.Key, item);
 				}
 			}
 		}
@@ -67,11 +83,15 @@ namespace CCStatus
 		{
 			if (!statuses.ContainsKey(name))
 			{
-				statuses.Add(name, status);
+				StatusItem item = new StatusItem();
+				item.Key = name;
+				item.StatusText = status;
+
+				statuses.Add(name, item);
 			}
 			else
 			{
-				statuses[name] = status;
+				statuses[name].StatusText = status;
 			}
 		}
 
@@ -80,9 +100,25 @@ namespace CCStatus
 		{
 			string s = "";
 
+			s += "<br/>";
+			s += "ONLINE Turtles";
+			s += "<br/>";
+
 			foreach (string key in statuses.Keys.OrderBy(key => key))
 			{
-				s += key.PadRight(8) + ": " + statuses[key] + "<br/>";
+				if (DateTime.Now - statuses[key].TimeStamp < new TimeSpan(0, 15, 0))
+					s += statuses[key].ToHtml() + "<br/>";
+			}
+
+			s += "<br/>";
+			s += "<br/>";
+			s += "OFFLINE Turtles";
+			s += "<br/>";
+
+			foreach (string key in statuses.Keys.OrderBy(key => key))
+			{
+				if (DateTime.Now - statuses[key].TimeStamp >= new TimeSpan(0, 15, 0))
+					s += statuses[key].ToHtml() + "<br/>";
 			}
 
 			return s;
@@ -100,9 +136,8 @@ namespace CCStatus
 			//File.Delete(filename);
 
 			if (!File.Exists(filename))
-			{
 				return null;
-			}
+			
 						
 			StreamReader sr = new StreamReader(filename);
 

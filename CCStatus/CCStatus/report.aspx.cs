@@ -35,7 +35,7 @@ namespace CCStatus
 		{
 			if (Request.QueryString["name"] != null && Request.QueryString["status"] != null)
 			{
-				TheStatusDict.Set(Request.QueryString["name"], DateTime.Now.ToString("HH:mm:ss") + " " + Request.QueryString["status"]);
+				TheStatusDict.Set(Request.QueryString["name"], Request.QueryString["status"]);
 				TheStatusDict.SaveToFolder(Server.MapPath("~"));
 			}
 		}
