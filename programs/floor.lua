@@ -8,8 +8,8 @@ if #tArgs ~= 2 then
   return
 end
 
-length = tonumber( tArgs[1] )
-width  = tonumber( tArgs[2] )
+local length = tonumber( tArgs[1] )
+local width  = tonumber( tArgs[2] )
 
 function forward()
   while turtle.detect() do
@@ -107,7 +107,7 @@ function main()
       end
     end
     
-    ccstatus.report("Building floor row "..i.."/"..width)
+    ccstatus.report("Building floor row "..currentWidth.."/"..width)
     if placeRow(length) == false then
       ccstatus.report("Ran out of blocks to place!") --should never happen anymore...
     end
