@@ -34,6 +34,7 @@ programs = {
   "position",
   "r",
   "room",
+  "report",
   "shaft",
   "startup",
   "test",
