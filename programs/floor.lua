@@ -8,8 +8,8 @@ if #tArgs ~= 2 then
   return
 end
 
-local length = tonumber( tArgs[1] )
-local width  = tonumber( tArgs[2] )
+length = tonumber( tArgs[1] )
+width  = tonumber( tArgs[2] )
 
 function forward()
   while turtle.detect() do
