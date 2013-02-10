@@ -383,7 +383,7 @@ function fuelUp()
   print("Fuel is: "..turtle.getFuelLevel())
   print("Enough fuel? [y/n]")
   
-  if (read() == "y") return true
+  if read() == "y" then return true
 
   return false
 
