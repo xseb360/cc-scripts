@@ -6,7 +6,7 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 os.loadAPI('cc-scripts/apis/bt')
 
 -- Config
-local version = "v2.3 (better gravel, bt init)"
+local version = "v2.4 (fuel handling)"
 local author = "[by Henness]"
 
 local function report(s)
@@ -352,9 +352,41 @@ function checkReturn()
     
     unload()
 		turtle.select(1)
-		
+
+    checkFuel()
+    		
     returnLast()
 	end
+end
+
+
+function checkFuel()
+  if turtle.getFuelLevel() < 1000 then
+     report("Low on fuel. Waiting at drop chest...")
+     print("Press any key...")
+     read()
+          
+     while not fuelUp() do sleep(0.2) end
+
+  end
+end
+
+function fuelUp()
+
+
+  print("Insert fuel in slot 16 and press any key")
+  read()
+
+  turtle.select(16)
+  turtle.refuel()
+
+  print("Fuel is: "..turtle.getFuelLevel())
+  print("Enough fuel? [y/n]")
+  
+  if (read() == "y") return true
+
+  return false
+
 end
 
 function emptySlot(n)
