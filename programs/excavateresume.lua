@@ -4,18 +4,25 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 
 
 local tArgs = { ... }
-if #tArgs ~= 1 then
-	print( "Usage: excavate <diameter>" )
+if #tArgs < 1 or #tArgs > 2 then
+	print( "Usage: excavate <diameter> [maxDepth]" )
 	return
 end
 
--- Mine in a quarry pattern until we hit something we can't dig
+-- Mine in a quarry pattern until we hit something we can't dig or reach maxDepth
 local size = tonumber( tArgs[1] )
 if size < 1 then
 	print( "Excavate diameter must be positive" )
 	return
 end
-	
+
+if #tArgs == 2 then
+  local maxDepth = tonumber( tArgs[1] )
+else
+  local maxDepth = 256 -- until hitting bed rock
+end
+
+
 local depth = 0
 local unloaded = 0
 local collected = 0
@@ -88,9 +95,6 @@ local function collect()
 	
 	if nTotalItems > collected then
 		collected = nTotalItems
-		if math.fmod(collected + unloaded, 50) == 0 then
-			report( "Mined "..(collected + unloaded).." items." )
-		end
 	end
 	
 	if bFull then
@@ -160,6 +164,12 @@ local function tryForwards()
 end
 
 local function tryDown()
+
+  if depth > maxDepth then
+    report("Reached max depth. Returning...")
+    return false;
+  end
+
 	if not refuel() then
 		report( "Not enough Fuel" )
 		returnSupplies()
