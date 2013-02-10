@@ -17,9 +17,9 @@ if size < 1 then
 end
 
 if #tArgs == 2 then
-  local maxDepth = tonumber( tArgs[1] )
+  maxDepth = tonumber( tArgs[1] )
 else
-  local maxDepth = 256 -- until hitting bed rock
+  maxDepth = 256 -- until hitting bed rock
 end
 
 
