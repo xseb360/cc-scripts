@@ -37,7 +37,7 @@ namespace CCStatus
 
 		public string ToHtml()
 		{
-			return Key.PadRight(8) + ": " + TimeStamp.ToString("HH:mm:ss") + " " + StatusText;
+			return Key.PadRight(20) + ": " + TimeStamp.ToString("HH:mm:ss") + " " + StatusText;
 		}
 	}
 
