@@ -23,7 +23,9 @@ if turtle then
   turtleFuel = turtle.getFuelLevel()
   print(turtleLabel.." fuel level is : "..turtleFuel)
 
-  os.loadAPI("/cc-scripts/apis/ccstatus")
-  ccstatus.report("Ready!")
+  if fs.exists("/cc-scripts/apis/ccstatus") then
+    os.loadAPI("/cc-scripts/apis/ccstatus")
+    ccstatus.report("Ready!")
+  end
 
 end
