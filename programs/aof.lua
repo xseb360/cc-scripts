@@ -361,7 +361,7 @@ end
 
 
 function checkFuel()
-  if turtle.getFuelLevel() < 1000 then
+  if turtle.getFuelLevel() < 2000 then
      report("Low on fuel. Waiting at drop chest...")
      print("Press any key...")
      read()
