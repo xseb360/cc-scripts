@@ -30,7 +30,7 @@ namespace CCStatus
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			Response.Write("<BR/>");
-			lblOutput.Text = TheStatusDict.ToHtml() + "<BR/>";
+			FillPage();
 		}
 
 		protected void btnClear_Click(object sender, EventArgs e)
@@ -38,7 +38,12 @@ namespace CCStatus
 			TheStatusDict.Clear();
 			TheStatusDict.SaveToFolder(Server.MapPath("~"));
 
-			lblOutput.Text = TheStatusDict.ToHtml() + "<BR/>";
+			FillPage();
+		}
+
+		protected void FillPage()
+		{
+			lblOutput.Text = TheStatusDict.ToHtml(Request.QueryString["filter"]) + "<BR/>";
 		}
 
 	}

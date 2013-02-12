@@ -95,8 +95,7 @@ namespace CCStatus
 			}
 		}
 
-
-		public string ToHtml()
+		public string ToHtml(string filter)
 		{
 			string s = "";
 
@@ -106,7 +105,14 @@ namespace CCStatus
 
 			foreach (string key in statuses.Keys.OrderBy(key => key))
 			{
-				if (DateTime.Now - statuses[key].TimeStamp < new TimeSpan(0, maxIdleTime, 0))
+				bool display = true;
+
+				if (!string.IsNullOrEmpty(filter))
+				{
+					display = key.ToLower().StartsWith(filter.ToLower());
+				}
+
+				if (display && DateTime.Now - statuses[key].TimeStamp < new TimeSpan(0, maxIdleTime, 0))
 					s += statuses[key].ToHtml() + "<br/>";
 			}
 
@@ -117,7 +123,14 @@ namespace CCStatus
 
 			foreach (string key in statuses.Keys.OrderBy(key => key))
 			{
-				if (DateTime.Now - statuses[key].TimeStamp >= new TimeSpan(0, maxIdleTime, 0))
+				bool display = true;
+
+				if (!string.IsNullOrEmpty(filter))
+				{
+					display = key.ToLower().StartsWith(filter.ToLower());
+				}
+
+				if (display && DateTime.Now - statuses[key].TimeStamp >= new TimeSpan(0, maxIdleTime, 0))
 					s += statuses[key].ToHtml() + "<br/>";
 			}
 
