@@ -29,3 +29,13 @@ if turtle then
   end
 
 end
+
+local autoupdateFilename = "/cc-scripts/programs/autoUpdate"
+if fs.exist(autoupdateFilename) then
+  os.run({}, autoupdateFilename)
+end
+
+local autoexecFilename = "autoexec"
+if fs.exist(autoexecFilename) then
+  os.run({}, autoexecFilename)
+end

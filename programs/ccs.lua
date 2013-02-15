@@ -37,6 +37,7 @@ programs = {
   "room",
   "report",
   "shaft",
+  "slaughterhousemanager",
   "startup",
   "test",
   "torch",
