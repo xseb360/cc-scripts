@@ -31,11 +31,11 @@ if turtle then
 end
 
 local autoupdateFilename = "/cc-scripts/programs/autoUpdate"
-if fs.exist(autoupdateFilename) then
+if fs.exists(autoupdateFilename) then
   os.run({}, autoupdateFilename)
 end
 
 local autoexecFilename = "autoexec"
-if fs.exist(autoexecFilename) then
+if fs.exists(autoexecFilename) then
   os.run({}, autoexecFilename)
 end
