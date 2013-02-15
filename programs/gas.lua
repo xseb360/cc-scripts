@@ -4,9 +4,9 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 local tArgs = { ... }
 
 function main()
-  print("Usage: gas [fueler]")
-  print(" No arg starts fuel taker mode")
+  print("Usage: gas [fueler] [maxFuel]")
   print(" fueler starts fuel maker mode")
+  print(" No arg starts fuel taker mode. Stops at 150k fuel or [maxFuel]K.")
   print("")
   print(" Top chest has empty buckets")
   print(" Bottom chest has full buckets")
@@ -16,7 +16,14 @@ function main()
   if #tArgs == 1 and tArgs[1] == "fueler" then
   	parallel.waitForAny(keepMakingFuel, skip)
   else
+    if #tArgs == 1 then
+      paramMaxFuel = tArgs[1]
+    else
+      paramMaxFuel = 150
+    end
+
   	parallel.waitForAny(keepTakingFuel, skip)
+
   end
 
   print("done")
@@ -132,6 +139,12 @@ function keepTakingFuel()
     else
       waitingTime = waitExponentiallyLonger(waitingTime, maxWaitingTime, "full buckets")
     end
+
+    if turtle.getFuelLevel() > paramMaxFuel * 1000 then
+      ccstatus.report("Fueled up!")
+      return
+    end
+
   end
 
 end
