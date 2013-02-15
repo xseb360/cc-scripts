@@ -131,7 +131,7 @@ function keepTakingFuel()
   local waitingTime = 0.1
   local maxWaitingTime = 6.4
 
-  print("Taking fuel...")
+  print("Taking fuel (up to "..paramMaxFuel.."k)...")
 
   while 1 do 
     if takeFuelOnce() then 
