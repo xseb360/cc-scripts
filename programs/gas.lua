@@ -109,7 +109,7 @@ end
 
 
 function debugPrint(s)
-  local debugMode = true
+  local debugMode = false
 
   if debugMode then print(s) end
 end
@@ -131,7 +131,19 @@ function keepTakingFuel()
   local waitingTime = 0.1
   local maxWaitingTime = 6.4
 
-  print("Taking fuel (up to "..paramMaxFuel.."k)...")
+
+  if not turtle then
+    ccstatus.report("Not a turtle. No need for fuel. Exiting...")
+    return
+  end
+
+  if not os.getComputerLabel() then
+    ccstatus.report("Label the turtle first. Exiting...")
+    return
+  end
+
+
+  ccstatus.report("Taking fuel (up to "..paramMaxFuel.."k)...")
 
   while 1 do 
     if takeFuelOnce() then 
