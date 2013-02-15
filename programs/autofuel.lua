@@ -20,7 +20,7 @@ function AutoFuel()
         print("Fuelling up...")
         for slot=1, 16 do
                 turtle.select(slot)
-                if turtle.refuel(slot) then
+                if turtle.refuel() then
                         CurrentFuelLevel = turtle.getFuelLevel()
                         print("Fuel : "..CurrentFuelLevel)
                 end
