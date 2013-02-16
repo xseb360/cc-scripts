@@ -15,7 +15,7 @@ function keepSlaugthering()
  
   while 1 do
     slaugtherOnce()
-    sleep(1 * 60)
+    sleep(20 * 60)
   end
 
 end
