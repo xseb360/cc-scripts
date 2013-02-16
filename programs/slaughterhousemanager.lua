@@ -54,7 +54,7 @@ function openTop()
   redstone.setOutput("top", false)
 end
 
-function closeTop
+function closeTop()
   redstone.setOutput("top", true)
 end
 
