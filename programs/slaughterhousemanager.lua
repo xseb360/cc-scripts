@@ -15,13 +15,36 @@ function keepSlaugthering()
  
   while 1 do
     slaugtherOnce()
-    sleep(20 * 60)
+    longSleep(20 * 60)
+  end
+
+end
+
+function longSleep(sleepTime)
+
+  local totalElapse = 0;
+
+  while totalElapse < sleepTime do
+  
+    local sleepSegment = 60
+    if sleepSegment + totalElapse > sleepTime then
+      sleepSegment = sleepTime - totalElapse
+    end
+
+    sleep(sleepSegment)
+
+    totalElapse = totalElapse + sleepSegment
+
+    ccstatus.report("Slept "..totalElapse.."/"..sleepTime.."secs.")
+
   end
 
 end
 
 function slaugtherOnce()
   
+  ccstatus.report("Slaughtering...")
+
   purge()
   sleep(3)
   resupply()
