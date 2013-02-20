@@ -1,11 +1,5 @@
 
 
-digSugarCannesWaterHoles()
-
-
-
-function digSugarCannesWaterHoles()
-
 	line1()
 	line2()
 	line3()
@@ -27,8 +21,7 @@ function digSugarCannesWaterHoles()
 	line9()
 	line10()
 	line1()
-	
-end
+
 
 function digDownIce()
 	digDownIce()
