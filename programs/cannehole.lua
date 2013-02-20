@@ -2,7 +2,12 @@
 
 function digDownIce()
 	turtle.digDown()
-	turtle.select(1)
+	
+	if turtle.getItemCount(1) > 1 then
+		turtle.select(1)
+	else
+		turtle.select(2)
+	end	
 	turtle.placeDown()
 end
 
