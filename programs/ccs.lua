@@ -20,6 +20,7 @@ programs = {
   "autoupdate",
   "aof",
   "b",
+  "cannehole",
   "ccs",
   "d",
   "dig",
