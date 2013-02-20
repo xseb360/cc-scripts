@@ -8,7 +8,7 @@ end
 
 
 function move(x)
-  for i=0, x do
+  for i=1, x do
     turtle.forward()
   end
 end
