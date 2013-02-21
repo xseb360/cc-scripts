@@ -5,7 +5,8 @@ slot = 1
 
 function plantcanne()
 	
-	while turtle.getItemCount(slot) = 0 do
+	items = 
+	while turtle.getItemCount(slot) == 0 do
 		slot = slot + 1
 	end
 	
