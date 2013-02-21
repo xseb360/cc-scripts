@@ -34,7 +34,7 @@ function plantall()
 		move(1)
 		turtle.turnLeft()
 	end
-	move(10)
+	move(20)
 end
 
 plantall()	
