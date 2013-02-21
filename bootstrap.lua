@@ -20,10 +20,12 @@ bootstrap.close()
 -- by default.
 apis = {
   "cc_scripts",
-  "installer"
+  "installer",
+  "ccstatus"
 }
 
 programs = {
+  "autoupdate",
   "ccs",
   "floor",
   "room",
