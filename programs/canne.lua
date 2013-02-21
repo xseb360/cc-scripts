@@ -24,7 +24,7 @@ end
 function plantall()
 	turtle.up()
 	plantcanne()
-	for j=1,10
+	for j=1,10 do
 		move(10)
 		turtle.turnRight()
 		move(1)
