@@ -50,19 +50,14 @@ print("A total of " .. #apis .. " apis and " .. #programs .. " programs will be 
 -- Give the user the option to opt-out before we start
 -- installing stuff
 print()
-print("Type 'yes' and hit return to continue,")
-print("enter anything else to abort:")
 
-if read() ~= "yes" then
-  nextScreen()
-  print("You have exited the cc-scripts installer!")
-  print()
-  print("You can run the installer again from")
-  print("/cc-scripts/bootstrap")
-  print()
-  print("If you'd like to remove cc-scripts,")
-  print("simply delete /cc-scripts")
-  return
+if not os.getComputerLabel() then
+  print("No label found.")
+  print("Please enter this computer label:")
+
+  local lbl = read()
+
+  os.setComputerLabel(lbl)
 end
 
 -- Install all the things!
@@ -127,6 +122,6 @@ configureStartup()
 print()
 print("Installation completed! Enjoy cc-scripts!")
 print()
-print("Your computer will reboot in 3 seconds!")
-sleep(3)
+print("Your computer will reboot in 1 second!")
+sleep(1)
 os.reboot()
