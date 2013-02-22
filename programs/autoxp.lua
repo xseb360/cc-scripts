@@ -32,9 +32,9 @@ end
 function collectXP()
   
 --	if math.fmod(m.getLevels(), 5) == 0 then
-	if math.fmod(m.get(), 100) == 0 then
+--	if math.fmod(m.get(), 100) == 0 then
     reportLevel()
-  end
+--  end
 end
 
 function skip()
