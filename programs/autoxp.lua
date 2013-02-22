@@ -16,15 +16,23 @@ function keepXPing()
   print("Getting XP (press SPACE to stop)...")
 
   while true do
-   sleep(0.2)
+    attack()
+    collectXP()  
+    sleep(0.2)
+  end
+
+end
+
+function attack()
 	  if redstone.getInput("bottom") or redstone.getInput("top") or redstone.getInput("right") or redstone.getInput("left") then -- On
 		  turtle.attack()
 	  end
-  
-	  if math.fmod(m.getLevels(), 5) == 0 then
-      reportLevel()
-    end
+end
 
+function collectXP()
+  
+	if math.fmod(m.getLevels(), 5) == 0 then
+    reportLevel()
   end
 end
 
@@ -38,13 +46,22 @@ function skip()
 end
 
 function reportLevel()
-  ccstatus.report("Current Level: "..m.getLevels())
+  
+  local currentLevel = m.getLevels()
+
+  if currentLevel ~= lastReportLevel then
+    ccstatus.report("Current Level: "..currentLevel)
+    lastReportLevel = currentLevel
+  end
+
 end
 
 
 print("Initializing XP Module...")
 m = peripheral.wrap("right")
 print("XP Module ready.")
+
+lastReportLevel = 0
 
 local ok, err = pcall(main)
 if not ok then
