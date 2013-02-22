@@ -18,6 +18,7 @@ apis = {
 programs = {
   "autofuel",
   "autoupdate",
+  "autoxp",
   "aof",
   "b",
   "canne",
