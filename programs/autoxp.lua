@@ -32,7 +32,6 @@ end
 function collectXP()
   
 --	if math.fmod(m.getLevels(), 5) == 0 then
---	if math.fmod(m.get(), 100) == 0 then
     reportLevel()
 --  end
 end
@@ -51,7 +50,7 @@ function reportLevel()
   local currentLevel = m.getLevels()
 
   if currentLevel ~= lastReportLevel then
-    ccstatus.report("Current Level: "..currentLevel.."("..m.get()..")")
+    ccstatus.report("Current Level: "..currentLevel)
     lastReportLevel = currentLevel
   end
 
