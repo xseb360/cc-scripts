@@ -51,9 +51,16 @@ end
 function enchant()
   local enchantingSlot = 16
 
+  cctools.debugPrint("emptyInv")
   emptyInv()
+
+  cctools.debugPrint("getOneBook")
   getOneBook(enchantingSlot)
+  
+  cctools.debugPrint("enchantOneBook")
   enchantOneBook(enchantingSlot)
+  
+  cctools.debugPrint("dropEnchantedBook")
   dropEnchantedBook(enchantingSlot)
 
 end
