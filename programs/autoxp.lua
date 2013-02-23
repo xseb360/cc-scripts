@@ -36,14 +36,12 @@ end
 function collectXP()
   
   local currentLevel = m.getLevels()
-
---	if math.fmod(m.getLevels(), 5) == 0 then
-    reportLevel(currentLevel)
---  end
-
+  reportLevel(currentLevel)
 
   if currentLevel >= 30 then
     enchant()
+    local currentLevel = m.getLevels()
+    reportLevel(currentLevel)
   end
 
 end
