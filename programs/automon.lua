@@ -23,6 +23,9 @@ function monitorOnce()
 end
 
 function keepMonitoring()
+
+  report("Monitoring...")
+
   while true do
     monitorOnce()
     sleep(30)
