@@ -2,6 +2,8 @@
 os.loadAPI('cc-scripts/apis/ccstatus')
 os.loadAPI('cc-scripts/apis/inv')
 
+debugMode = true
+
 function debugPrint(s)
   if debugMode then print(s) end
 end
