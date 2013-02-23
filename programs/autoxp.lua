@@ -58,10 +58,10 @@ function enchant()
   getOneBook(enchantingSlot)
   
   cctools.debugPrint("enchantOneBook")
-  enchantOneBook(enchantingSlot)
-  
-  cctools.debugPrint("dropEnchantedBook")
-  dropEnchantedBook(enchantingSlot)
+  if enchantOneBook(enchantingSlot) then
+    cctools.debugPrint("dropEnchantedBook")
+    dropEnchantedBook(enchantingSlot)
+  end
 
 end
 
@@ -79,8 +79,19 @@ function getOneBook(slot)
 end
 
 function enchantOneBook(slot)
-
+  
   turtle.select(slot)
+
+  if turtle.getItemCount(slot) < 1 then
+    report("No book to enchant...")
+    sleep(10)
+    return false
+  else if turtle.getItemCount(slot) > 1 then
+    report("Too many items in enchanting slot...")
+    sleep(10)
+    return false
+  end
+
   m.enchant(30)
 
   enchantedBookCount = enchantedBookCount + 1
@@ -101,6 +112,10 @@ function skip()
 			break
 		end
 	end
+end
+
+function report(s)
+  ccstatus.report(s)
 end
 
 function reportLevel(currentLevel)
