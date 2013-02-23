@@ -36,3 +36,24 @@ function selectSimilarBlock(slot)
 	return false
 end
 
+function emptyAllInvDown()
+  local maxWaitingTime = 6.4
+  
+  for i=1,16 do
+    turtle.select(i)
+    local waitingTime = 0.1
+
+    while turtle.getItemCount(i) > 0 do 
+      waitingTime = waitExponentiallyLonger(waitingTime, maxWaitingTime, "inv dump")
+      turtle.dropDown() 
+    end
+  end
+end
+
+function emptyDownAndKeepSome(slot, keepCount)
+
+  turtle.select(slot)
+
+  turtle.dropDown(turtle.getItemCount(slot) - keepCount)
+
+end

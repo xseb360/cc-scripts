@@ -2,7 +2,11 @@
 
 -- APIs
 os.loadAPI('cc-scripts/apis/ccstatus')
+os.loadAPI('cc-scripts/apis/inv')
+os.loadAPI('cc-scripts/apis/cctools')
 
+debugMode = false
+enchantedBookCount = 0
 
 function main()
   
@@ -16,9 +20,9 @@ function keepXPing()
   print("Getting XP (press SPACE to stop)...")
 
   while true do
-    attack()
+--    attack()
     collectXP()  
-    sleep(0.2)
+    sleep(10)
   end
 
 end
@@ -31,9 +35,47 @@ end
 
 function collectXP()
   
+  local currentLevel = m.getLevels()
+
 --	if math.fmod(m.getLevels(), 5) == 0 then
-    reportLevel()
+    reportLevel(currentLevel)
 --  end
+
+
+  if currentLevel >= 30 then
+    echant()
+  end
+
+end
+
+function enchant()
+
+  emptyInv()
+  getOneBook(16)
+  enchantOneBook(16)
+
+end
+
+function emptyInv()
+  inv.emptyAllInvDown()
+end
+
+function getOneBook(slot)
+  
+  turtle.select(slot)
+  turtle.suckUp() -- get some book in slot 16
+
+  inv.emptyDownAndKeepSome(slot, 1) -- drop all but one
+
+end
+
+function enchantOneBook(slot)
+
+  turtle.select(slot)
+  m.enchant(30)
+
+  enchantedBookCount = enchantedBookCount + 1
+
 end
 
 function skip()
@@ -45,12 +87,10 @@ function skip()
 	end
 end
 
-function reportLevel()
+function reportLevel(currentLevel)
   
-  local currentLevel = m.getLevels()
-
   if currentLevel ~= lastReportLevel then
-    ccstatus.report("Current Level: "..currentLevel)
+    ccstatus.report("Current Level: "..currentLevel.." ("..enchantedBookCount.."book(s) enchanted)")
     lastReportLevel = currentLevel
   end
 

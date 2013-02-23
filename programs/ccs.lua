@@ -7,6 +7,7 @@ apis = {
   "bt",
   "cc_scripts",
   "ccstatus",
+  "cctools",
   "direction",
   "events",
   "funct",
