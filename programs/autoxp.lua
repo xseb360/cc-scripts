@@ -51,24 +51,22 @@ end
 function enchant()
   local enchantingSlot = 16
 
-  cctools.debugPrint("emptyInv")
   emptyInv()
-
-  cctools.debugPrint("getOneBook")
   getOneBook(enchantingSlot)
   
   if enchantOneBook(enchantingSlot) then
-    cctools.debugPrint("dropEnchantedBook")
     dropEnchantedBook(enchantingSlot)
   end
 
 end
 
 function emptyInv()
+  cctools.debugPrint("emptyInv")
   inv.emptyAllInvDown()
 end
 
 function getOneBook(slot)
+  cctools.debugPrint("getOneBook")
   
   turtle.select(slot)
   turtle.suckUp() -- get some book in slot 16
@@ -92,7 +90,7 @@ function enchantOneBook(slot)
     report("No book to enchant...")
     sleep(10)
     return false
-  else if itemCount > 1 then
+  elseif itemCount > 1 then
     report("Too many items in enchanting slot...")
     sleep(10)
     return false
@@ -106,6 +104,7 @@ function enchantOneBook(slot)
 end
 
 function dropEnchantedBook(slot)
+  cctools.debugPrint("dropEnchantedBook")
 
   turtle.select(slot)
   turtle.dropDown()
