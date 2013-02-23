@@ -90,7 +90,7 @@ end
 function reportLevel(currentLevel)
   
   if currentLevel ~= lastReportLevel then
-    ccstatus.report("Current Level: "..currentLevel.." ("..enchantedBookCount.."book(s) enchanted)")
+    ccstatus.report("Current Level: "..currentLevel.." ("..enchantedBookCount.." book(s) enchanted)")
     lastReportLevel = currentLevel
   end
 

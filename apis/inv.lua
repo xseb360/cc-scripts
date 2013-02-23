@@ -1,4 +1,6 @@
 
+-- APIs
+os.loadAPI('cc-scripts/apis/cctools')
 
 
 function waitForSelectSimilarBlock(slot, blockName)
@@ -44,7 +46,7 @@ function emptyAllInvDown()
     local waitingTime = 0.1
 
     while turtle.getItemCount(i) > 0 do 
-      waitingTime = waitExponentiallyLonger(waitingTime, maxWaitingTime, "inv dump")
+      waitingTime = cctools.waitExponentiallyLonger(waitingTime, maxWaitingTime, "inv dump")
       turtle.dropDown() 
     end
   end
