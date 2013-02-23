@@ -43,7 +43,7 @@ function collectXP()
 
 
   if currentLevel >= 30 then
-    echant()
+    enchant()
   end
 
 end
