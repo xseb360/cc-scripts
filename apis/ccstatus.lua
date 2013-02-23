@@ -6,8 +6,6 @@ function report(s)
 
   s = string.gsub(s, " ", "+")
 
-  status = ""
-
   if turtle then
     local fuelLevel = math.floor(turtle.getFuelLevel() / 1000).."k";
     
