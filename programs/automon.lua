@@ -15,10 +15,11 @@ function monitorOnce()
 
 
   if redstone.getInput("back") then
-   	m.write("* * * O U T   O F   L A V A * * *")
-
+   	m.write("* * * OUT OF LAVA * * *")
+    report("Out of Lava")
   else
  	  m.write("Monitoring...")
+    report("Monitoring...")
   end
 end
 
