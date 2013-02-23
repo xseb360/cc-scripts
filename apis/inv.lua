@@ -52,10 +52,14 @@ function emptyAllInvDown()
   end
 end
 
-function emptyDownAndKeepSome(slot, keepCount)
+
+function emptyUpButKeepSome(slot, keepCount)
 
   turtle.select(slot)
+  local toDrop = turtle.getItemCount(slot) - keepCount
 
-  turtle.dropDown(turtle.getItemCount(slot) - keepCount)
+  if toDrop > 0 then
+    turtle.dropUp(toDrop)
+  end
 
 end

@@ -49,10 +49,12 @@ function collectXP()
 end
 
 function enchant()
+  local enchantingSlot = 16
 
   emptyInv()
-  getOneBook(16)
-  enchantOneBook(16)
+  getOneBook(enchantingSlot)
+  enchantOneBook(enchantingSlot)
+  dropEnchantedBook(enchantingSlot)
 
 end
 
@@ -65,8 +67,8 @@ function getOneBook(slot)
   turtle.select(slot)
   turtle.suckUp() -- get some book in slot 16
 
-  inv.emptyDownAndKeepSome(slot, 1) -- drop all but one
-
+  inv.emptyUpButKeepSome(slot, 1) -- drop all but one
+  
 end
 
 function enchantOneBook(slot)
@@ -75,6 +77,13 @@ function enchantOneBook(slot)
   m.enchant(30)
 
   enchantedBookCount = enchantedBookCount + 1
+
+end
+
+function dropEnchantedBook(slot)
+
+  turtle.select(slot)
+  turtle.dropDown()
 
 end
 
