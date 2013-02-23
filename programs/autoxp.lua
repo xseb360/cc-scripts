@@ -101,6 +101,7 @@ function enchantOneBook(slot)
 
   enchantedBookCount = enchantedBookCount + 1
 
+  return true
 end
 
 function dropEnchantedBook(slot)
