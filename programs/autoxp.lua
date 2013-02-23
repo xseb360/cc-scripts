@@ -5,7 +5,7 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 os.loadAPI('cc-scripts/apis/inv')
 os.loadAPI('cc-scripts/apis/cctools')
 
-debugMode = false
+debugMode = true
 enchantedBookCount = 0
 
 function main()
