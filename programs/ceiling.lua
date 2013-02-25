@@ -28,6 +28,20 @@ function skip()
 	end
 end
 
+function moveToNextRow(currentRow)
+
+      if currentRow % 2 == 0 then
+        turtle.turnLeft()
+        bt.forceForward()
+        turtle.turnLeft()
+      else
+        turtle.turnRight()
+        bt.forceForward()
+        turtle.turnRight()
+      end
+
+end
+
 function buildRow(length)
 
   for i = 1, length do
@@ -57,14 +71,9 @@ function buildCeiling()
     
     buildRow(lengthArg)
 
+    -- move to the next row unless it's the last one
+    if i ~= widthArg then moveToNextRow(i) end
 
-    -- change to the next row unless it's the last one
-    if i ~= widthArg then
-      turtle.turnRight()
-      bt.forceForward()
-      turtle.turnRight()
-    end
-    
   end
 
   ccstatus.report("Tower complete!")
