@@ -26,6 +26,7 @@ programs = {
   "canne",
   "cannehole",
   "ccs",
+  "craft",
   "d",
   "dig",
   "direction",
@@ -47,6 +48,7 @@ programs = {
   "startup",
   "test",
   "torch",
+  "tower",
   "treefarm",
   "u",
   "wall"
