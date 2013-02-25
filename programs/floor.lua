@@ -5,6 +5,9 @@ local tArgs = { ... }
 
 if #tArgs ~= 2 then
   print("Usage: floor <length> <width>")
+  print("* Floor starts under the turtle.")
+  print("* Build forward and to the right.")
+  print("* Representative building block in slot 1.")
   return
 end
 
