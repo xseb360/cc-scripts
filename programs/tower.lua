@@ -60,7 +60,7 @@ function buildWall(length)
     end
 
     turtle.placeDown()
-    if i ~= length then forceForward() end
+    if i ~= length then bt.forceForward() end
   end
 
 end
