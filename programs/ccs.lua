@@ -26,6 +26,7 @@ programs = {
   "canne",
   "cannehole",
   "ccs",
+  "ceiling",
   "craft",
   "d",
   "dig",
