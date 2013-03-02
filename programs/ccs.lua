@@ -45,6 +45,7 @@ programs = {
   "r",
   "room",
   "report",
+  "sidewall",
   "shaft",
   "slaughterhousemanager",
   "startup",

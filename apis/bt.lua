@@ -24,6 +24,16 @@ function digUpUntilClear()
 
 end
 
+function digUntilClear()
+
+  while turtle.detect() do
+    turtle.dig()
+    sleep(0.5)
+  end
+
+end
+
+
 function forceUp()
 
   while not turtle.up() do
