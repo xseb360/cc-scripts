@@ -191,7 +191,20 @@ if #tArgs > 1 then
   end
 end
 
+function cleanObsoletePrograms()
+  fs.delete("/cc-scripts/programs/craft")
+end
+
+
+
+
+
+
+
 -- "css update ..."
+
+cleanObsoletePrograms()
+
 if subCommand == "update" then
   if #tArgs == 1 then
     updateAll()
