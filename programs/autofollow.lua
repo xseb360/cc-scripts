@@ -5,6 +5,8 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 
 local tArgs = { ... }
 
+moveCount = 0
+
 function main()
     ccstatus.report("Following...")
   	parallel.waitForAny(autoFollow, skip)
@@ -13,7 +15,15 @@ end
 
 function autoFollow()
   while true do
-    turtle.forward()
+    
+    if turtle.forward() then
+      moveCount = moveCount + 1
+
+    if math.fmod(moveCount, 10) == 0 then 
+      ccstatus.report("Followed for "..moveCount.." meters...")
+    end
+
+    sleep(1)
   end
 end
 
