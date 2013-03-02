@@ -17,6 +17,7 @@ apis = {
 }
 
 programs = {
+  "autocraft",
   "autofuel",
   "automon",
   "autoupdate",
@@ -27,7 +28,6 @@ programs = {
   "cannehole",
   "ccs",
   "ceiling",
-  "craft",
   "d",
   "dig",
   "direction",
@@ -48,6 +48,7 @@ programs = {
   "slaughterhousemanager",
   "startup",
   "test",
+  "tunnel",
   "torch",
   "tower",
   "treefarm",
