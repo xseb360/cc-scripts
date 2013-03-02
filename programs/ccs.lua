@@ -18,6 +18,7 @@ apis = {
 
 programs = {
   "autocraft",
+  "autofollow",
   "autofuel",
   "automon",
   "autoupdate",
