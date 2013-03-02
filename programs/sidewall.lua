@@ -18,7 +18,7 @@ function sidewallOne()
     sleep(10)
   end
   
-  bt.place()
+  turtle.place()
 
   turtle.turnLeft()
 end
