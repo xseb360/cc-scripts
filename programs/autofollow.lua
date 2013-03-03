@@ -20,13 +20,13 @@ function autoFollow()
       
       moveCount = moveCount + 1
 
-      if math.fmod(moveCount, 10) == 0 then 
+      if math.fmod(moveCount, 5) == 0 then 
         ccstatus.report("Followed for "..moveCount.." meters...")
       end
 
     end
 
-    sleep(1)
+    sleep(5)
   end
 end
 
