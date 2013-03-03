@@ -17,10 +17,13 @@ function autoFollow()
   while true do
     
     if turtle.forward() then
+      
       moveCount = moveCount + 1
 
-    if math.fmod(moveCount, 10) == 0 then 
-      ccstatus.report("Followed for "..moveCount.." meters...")
+      if math.fmod(moveCount, 10) == 0 then 
+        ccstatus.report("Followed for "..moveCount.." meters...")
+      end
+
     end
 
     sleep(1)
