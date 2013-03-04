@@ -165,7 +165,7 @@ end
 
 local function tryDown()
 
-  if depth > maxDepth then
+  if depth >= maxDepth then
     report("Reached max depth. Returning...")
     return false;
   end
