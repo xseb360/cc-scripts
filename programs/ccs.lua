@@ -26,6 +26,7 @@ programs = {
   "aof",
   "b",
   "bore",
+  "buildshape",
   "canne",
   "cannehole",
   "ccs",
