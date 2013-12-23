@@ -28,6 +28,6 @@ function AutoFuel()
         print("Done.")
 end
  
-if introQuestion() then
+--if introQuestion() then
         AutoFuel()
-end
+--end
