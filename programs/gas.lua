@@ -172,7 +172,7 @@ function takeFuelOnce()
     return false
   end
 
-  ccstatus.report("Taking fuel ("..turtle.getFuelLevel().."/"..paramMaxFuel.."k)...")
+  ccstatus.report("Taking fuel ("..turtle.getFuelLevel()/1000.."k/"..paramMaxFuel.."k)...")
 
   return true
   
