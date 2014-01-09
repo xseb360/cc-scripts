@@ -172,7 +172,8 @@ function takeFuelOnce()
     return false
   end
 
-  ccstatus.report("Taking fuel ("..turtle.getFuelLevel()/1000.."k/"..paramMaxFuel.."k)...")
+  local fuelLevel = math.floor(turtle.getFuelLevel() / 1000).."k";
+  ccstatus.report("Taking fuel ("..fuelLevel.."k/"..paramMaxFuel.."k)...")
 
   return true
   
