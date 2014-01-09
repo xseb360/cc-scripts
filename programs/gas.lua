@@ -172,7 +172,7 @@ function takeFuelOnce()
     return false
   end
 
-  print(turtle.getFuelLevel())
+  ccstatus.report(turtle.getFuelLevel())
 
   return true
   
