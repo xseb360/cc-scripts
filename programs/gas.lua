@@ -172,7 +172,6 @@ function takeFuelOnce()
     return false
   end
 
-  ccstatus.report()
   ccstatus.report("Taking fuel...")
 
   return true
