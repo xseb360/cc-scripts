@@ -173,7 +173,7 @@ function takeFuelOnce()
   end
 
   ccstatus.report()
-  ccstatus.report("Taking fuel (up to "..paramMaxFuel.."k)...")
+  ccstatus.report("Taking fuel...")
 
   return true
   
