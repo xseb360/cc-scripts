@@ -6,17 +6,19 @@
 wSF=1
 witherCount = 1
 
-killTimer = 50
-rechargeTimer = 60
+killTimer = 120
+rechargeTimer = 120
 resupplyTimer = 30
 
 minSoulsand = 5
 minWitherSkull = 3
 minFuel = 3000
+minObsidian = 1
 
 soulsandSlot = 1
 witherSkullSlot = 2
 coalSlot = 3
+obsidianSlot = 4
 
 
 function main()
@@ -79,34 +81,65 @@ function switchRedstone(status)
 end
  
 function checkInv()
-  if turtle.getItemCount(1)<minSoulsand then -- Soul Sands
-    turtle.select(soulsandSlot)
+  
+  -- Soul Sands
+  if turtle.getItemCount(soulsandSlot)<minSoulsand then
     turtle.turnLeft()
+
+    turtle.select(soulsandSlot)
     turtle.suck()
+
     turtle.turnRight()
   end
-  if turtle.getItemCount(2)<minWitherSkull then -- Wither Skulls
+  
+  -- Wither Skulls
+  if turtle.getItemCount(witherSkullSlot)<minWitherSkull then
+    turtle.turnRight()
+
     turtle.select(witherSkullSlot)
-    turtle.turnRight()
     turtle.suck()
+
     turtle.turnLeft()
-    turtle.select(soulsandSlot)
   end
+  
+  -- Obsidian
+  if turtle.getItemCount(obsidianSlot)<minObsidian then
+	turtle.up()
+    turtle.turnLeft()
+
+    turtle.select(obsidianSlot)
+    turtle.suck()
+
+    turtle.turnRight()
+	turtle.down()
+  end
+  
+  -- Fuel
   if turtle.getFuelLevel()<minFuel then
+	turtle.up()
+    turtle.turnRight()
+
     turtle.select(coalSlot)
-    turtle.suckUp()
+    turtle.suck()
     turtle.refuel()
-    turtle.select(soulsandSlot)
+
+    turtle.turnLeft()
+	turtle.down()
+
   end
   
   wSF = 1 -- assuming every supply is full
   
-  if turtle.getItemCount(1)<minSoulsand then -- Soul Sands
+  if turtle.getItemCount(soulsandSlot) < minSoulsand then -- Soul Sands
 	report('Missing Soul Sands')
     wSF=0
   end
-  if turtle.getItemCount(2)<minWitherSkull then -- Wither Skulls
+  if turtle.getItemCount(witherSkullSlot) < minWitherSkull then -- Wither Skulls
 	report('Missing Wither Skulls')
+    wSF=0
+  end
+  if turtle.getItemCount(obsidianSlot) < minObsidian then -- Obsidian
+	report('Missing Obsidian')
     wSF=0
   end
   if turtle.getFuelLevel()<minFuel then
@@ -120,6 +153,7 @@ function buildWither()
 --[[
 LEGEND:
 	(C)oal Chest
+	(O)bsidian Chest
 	(S)oulsand Chest
 	(W)ither skull Chest
 	(P)rojector
@@ -149,9 +183,9 @@ Top View:
 	     ***
 		 ***
 	2nd layer:
-         ***
-        C* *
-         ***
+        O***
+         * *
+        C***
 	3rd layer:
 	    S***
 	   PT754
@@ -205,7 +239,7 @@ Force Field:
 
 	-- Add the bottom block
 	turtle.down()
-	turtle.select(soulsandSlot)
+	turtle.select(obsidianSlot)
 	turtle.placeDown() -- B (base block. for the wither to stand on)
 	turtle.up()
 	
