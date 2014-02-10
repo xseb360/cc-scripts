@@ -228,7 +228,7 @@ Force Field:
 	turtle.back()
 
 	turtle.select(witherSkullSlot)
-	--DO NOT COMPLETE turtle.place()
+	turtle.place()
 
 	--turtle.back() -- include if the wither was built 1 block farther away
 end
