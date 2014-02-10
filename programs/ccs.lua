@@ -56,7 +56,8 @@ programs = {
   "tower",
   "treefarm",
   "u",
-  "wall"
+  "wall",
+  "witherfarm"
 }
 
 
