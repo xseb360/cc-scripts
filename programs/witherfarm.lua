@@ -19,12 +19,6 @@ witherSkullSlot = 2
 coalSlot = 3
 
 
-local ok, err = pcall(main)
-if not ok then
-	report(err)
-end
-
-
 function main()
  	--parallel.waitForAny(keepFarmingWither(), skip)
 	keepFarmingWither()
@@ -246,3 +240,7 @@ end
 
 
 
+local ok, err = pcall(main)
+if not ok then
+	report(err)
+end
