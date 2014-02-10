@@ -4,6 +4,7 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 local tArgs = { ... }
 
 representativeBlockSlot = 1
+enderChestSlot = 2
 firstInventorySlot = 3
 
 if #tArgs ~= 2 then
@@ -17,6 +18,8 @@ end
 
 local length = tonumber( tArgs[1] )
 local width  = tonumber( tArgs[2] )
+--local length = 4
+--local width  = 4
 
 function forward()
   while turtle.detect() do
@@ -76,12 +79,12 @@ function placeSimilarBlockFromInventory()
         return true
       end
     end
-    
+
     -- If we've gotten this far, we're out of blocks to place
-    ccstatus.report("Out of floor building blocks. Retrying in 10 secs...")
-    sleep(10)
+	ccstatus.report("Out of floor building blocks. Resupplying...")
+	ResupplyFromEnderChest()
+    
 		
-	--ResupplyFromEnderChest()
 	  
   end -- while 1
   
@@ -90,7 +93,36 @@ function placeSimilarBlockFromInventory()
 end
 
 function ResupplyFromEnderChest()
+	turtle.select(enderChestSlot)
+	turtle.placeUp()
+	
+	resuppliedStackCount = 0
+	while SelectEmptyInventorySlot() and turtle.suckUp() do
+		resuppliedStackCount = resuppliedStackCount + 1
+	end
 
+	turtle.select(enderChestSlot)
+	turtle.digUp()
+	turtle.select(representativeBlockSlot)
+
+	
+	if resuppliedStackCount == 0 then
+		-- Now, we're out of blocks to place and out of resuplies
+		ccstatus.report("Out of floor building blocks and no resupplies availlable. Retrying in 30 secs...")
+		sleep(30)
+	end
+	
+end
+
+function SelectEmptyInventorySlot()
+    for i = firstInventorySlot, 16 do
+      if turtle.getItemCount(i) == 0 then
+        turtle.select(i)
+        return true
+      end
+    end
+	
+	return false
 end
 
 function placeRow(length)
@@ -129,7 +161,9 @@ function main()
   ccstatus.report("Floor complete!")
 end
 
-local ok, err = pcall(main)
-if not ok then
-  ccstatus.report(err)
-end
+--function test()
+	local ok, err = pcall(main)
+	if not ok then
+	  ccstatus.report(err)
+	end
+--end
