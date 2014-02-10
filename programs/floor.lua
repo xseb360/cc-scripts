@@ -3,11 +3,15 @@ os.loadAPI('cc-scripts/apis/ccstatus')
 
 local tArgs = { ... }
 
+representativeBlockSlot = 1
+firstInventorySlot = 3
+
 if #tArgs ~= 2 then
   print("Usage: floor <length> <width>")
   print("* Floor starts under the turtle.")
   print("* Build forward and to the right.")
   print("* Representative building block in slot 1.")
+  print("* Resupply Ender Chest in slot 2.")
   return
 end
 
@@ -31,7 +35,7 @@ end
 -- but only if the block beneath the turtle is different than
 -- the block in slot 1 OR if the block below is empty (air or liquid).
 function placeIfDifferent(slot)
-  turtle.select(1)
+  turtle.select(representativeBlockSlot)
   if not turtle.compareDown() then
     turtle.select(slot)
     turtle.placeDown()
@@ -47,26 +51,26 @@ end
 -- returns false if there are no additional blocks identical
 -- to the block in slot 1 to place.
 function placeSimilarBlockFromInventoryUntilCompare()
-  turtle.select(1)
+  turtle.select(representativeBlockSlot)
   while not turtle.compareDown() do
     placeSimilarBlockFromInventory()
   end
 end
 
 function placeSimilarBlockFromInventory()
-  turtle.select(1)
+  turtle.select(representativeBlockSlot)
 
   while 1 do
 
   -- Place excess blocks from slot 1
     -- before using any other slots
-    if turtle.getItemCount(1) > 1 then
-      placeIfDifferent(1)
+    if turtle.getItemCount(representativeBlockSlot) > 1 then
+      placeIfDifferent(representativeBlockSlot)
       return true
     end
 
     -- Attempt to find similar blocks in other slots
-    for i = 2, 16 do
+    for i = firstInventorySlot, 16 do
       if turtle.compareTo(i) then
         placeIfDifferent(i)
         return true
@@ -76,11 +80,17 @@ function placeSimilarBlockFromInventory()
     -- If we've gotten this far, we're out of blocks to place
     ccstatus.report("Out of floor building blocks. Retrying in 10 secs...")
     sleep(10)
-  
+		
+	--ResupplyFromEnderChest()
+	  
   end -- while 1
   
   -- will never get here now. looping and waiting until new blocks are added to inventory.
   return false
+end
+
+function ResupplyFromEnderChest()
+
 end
 
 function placeRow(length)
