@@ -3,8 +3,17 @@
 --os.loadAPI('cc-scripts/apis/bt')
 
 
+local tArgs = { ... }
+
+if #tArgs ~= 1 then
+  print("Usage: witherfarm <witherCount>")
+  print("* Farms <witherCount> wither bosses for their Nether Stars.")
+  return
+end
+
+local witherCount = tonumber( tArgs[1] )
+
 wSF=1
-witherCount = 1
 
 killTimer = 120
 rechargeTimer = 120
@@ -19,6 +28,9 @@ soulsandSlot = 1
 witherSkullSlot = 2
 coalSlot = 3
 obsidianSlot = 4
+
+
+
 
 
 function main()
