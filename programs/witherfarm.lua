@@ -1,4 +1,4 @@
---os.loadAPI('cc-scripts/apis/ccstatus')
+os.loadAPI('cc-scripts/apis/ccstatus')
 --os.loadAPI('cc-scripts/apis/inv')
 --os.loadAPI('cc-scripts/apis/bt')
 
@@ -12,8 +12,9 @@ if #tArgs ~= 1 then
 end
 
 local witherCount = tonumber( tArgs[1] )
-
 wSF=1
+
+currentWitherNumber = 1
 
 killTimer = 90
 rechargeTimer = 120
@@ -49,7 +50,7 @@ end
 
 function keepFarmingWither()
 	for i=1, witherCount do
-		report('Farming wither...'..i..' of '..witherCount)
+		currentWitherNumber = i
 		farmOneWither()
 		if i ~= witherCount then
 			countDown(rechargeTimer, 'Recharging')
@@ -75,15 +76,13 @@ function farmOneWither()
 end
 
 function countDown(cnt, sleepingReason)
-	report(sleepingReason..' '..cnt..'secs')
-	
 	for i=1, cnt/5 do
 		sleepLen = 5
 		if i*5 > cnt then
 			sleepLen = (i*5) - cnt
 		end
 		sleep(sleepLen)
-		report(((i-1)*5)+sleepLen..'/'..cnt)
+		report(sleepingReason..' '..((i-1)*5)+sleepLen..'/'..cnt..'secs')
 	end
 end
 
@@ -93,6 +92,8 @@ function switchRedstone(status)
 end
  
 function checkInv()
+  
+  report('Checking inventories...')
   
   -- Soul Sands
   if turtle.getItemCount(soulsandSlot)<minSoulsand then
@@ -280,8 +281,9 @@ Force Field:
 end
 
 function report(s)
-  --ccstatus.report(s)
-  print(s)
+	ccstatus.report('Farming wither...'..currentWitherNumber..' of '..witherCount..' - '..s)
+ 
+  --print(s)
 end
 
 
