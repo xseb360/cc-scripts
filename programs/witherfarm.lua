@@ -15,7 +15,7 @@ local witherCount = tonumber( tArgs[1] )
 
 wSF=1
 
-killTimer = 120
+killTimer = 90
 rechargeTimer = 120
 resupplyTimer = 30
 
@@ -243,7 +243,7 @@ Force Field:
 	***
 ]]
 
-	--turtle.forward() -- include to place the wither 1 block farther away
+	turtle.forward() -- include to place the wither 1 block farther away
 	
 	turtle.forward()
 	turtle.forward()
@@ -276,7 +276,7 @@ Force Field:
 	turtle.select(witherSkullSlot)
 	turtle.place()
 
-	--turtle.back() -- include if the wither was built 1 block farther away
+	turtle.back() -- include if the wither was built 1 block farther away
 end
 
 function report(s)
