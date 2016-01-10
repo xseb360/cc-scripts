@@ -18,7 +18,7 @@ function report(s)
     statusToReport = s
   end
 
-  local conn = http.get("http://casper3.dyndns.org:8008/ccstatus/report.aspx?name="..os.getComputerLabel().."&status="..statusToReport)
+  local conn = http.get("http://casper3.duckdns.org:8008/ccstatus/report.aspx?name="..os.getComputerLabel().."&status="..statusToReport)
   
   if conn then
     conn.readAll()
